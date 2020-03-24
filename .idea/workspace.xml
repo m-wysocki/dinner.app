@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fcb3a65-d45a-46a8-8c4d-8ae968dc7bcf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/MainTemplate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/MainTemplate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +99,8 @@
       <workItem from="1583177309778" duration="1828000" />
       <workItem from="1583179187462" duration="5667000" />
       <workItem from="1583698566572" duration="1206000" />
-      <workItem from="1583866926599" duration="3380000" />
+      <workItem from="1583866926599" duration="3528000" />
+      <workItem from="1584994504385" duration="2349000" />
     </task>
     <servers />
   </component>
@@ -108,6 +112,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2072" y="361" key="#ESLint/0.0.3440.1400@0.0.3440.1400" timestamp="1583181590094" />
+    <state x="359" y="358" key="#File_Watchers" timestamp="1583870434673">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="359" y="358" key="#File_Watchers/0.0.3440.1400@0.0.3440.1400" timestamp="1583870434673" />
     <state x="352" y="361" key="#Plugins" timestamp="1583180814947">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
