@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fcb3a65-d45a-46a8-8c4d-8ae968dc7bcf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/preview-head.html" beforeDir="false" afterPath="$PROJECT_DIR$/.storybook/preview-head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/MainTemplate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/MainTemplate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/GlobalStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/GlobalStyle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/mainTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/mainTheme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +40,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/images/categories" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -51,9 +52,12 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Projekty\shopping-list\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projekty\shopping-list\src\assets\images\categories" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Projekty\shopping-list\src\templates" />
       <recent name="C:\Projekty\shopping-list\src\theme" />
@@ -101,7 +105,8 @@
       <workItem from="1583698566572" duration="1206000" />
       <workItem from="1583866926599" duration="3528000" />
       <workItem from="1584994504385" duration="2349000" />
-      <workItem from="1585077161796" duration="1404000" />
+      <workItem from="1585077161796" duration="3709000" />
+      <workItem from="1585249812240" duration="3971000" />
     </task>
     <servers />
   </component>
@@ -133,13 +138,17 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2260" y="457" key="FileChooserDialogImpl/0.0.3440.1400@0.0.3440.1400" timestamp="1583181564233" />
-    <state x="1981" y="345" key="SettingsEditor" timestamp="1583184844909">
+    <state x="1981" y="345" key="SettingsEditor" timestamp="1585251261999">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1981" y="345" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1583184844909" />
-    <state x="423" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1583184765404">
+    <state x="1981" y="345" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1585251261999" />
+    <state x="423" y="332" key="run.anything.popup" timestamp="1585251473041">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="423" y="320" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1583184765404" />
+    <state x="423" y="332" key="run.anything.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1585251473041" />
+    <state x="423" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1585251226635">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="423" y="320" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1585251226635" />
   </component>
 </project>
