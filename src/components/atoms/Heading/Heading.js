@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-const Header = styled.h2`
-  line-height: 1.5;
+const Heading = styled.h2`
+  line-height: 1.3;
   font-size: 3.2rem;
   font-weight: ${({ theme }) => theme.bold};
   margin-bottom: 30px;
@@ -18,4 +18,4 @@ const Header = styled.h2`
     `}
 `;
 
-export default Header;
+export default Heading;

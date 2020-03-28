@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fcb3a65-d45a-46a8-8c4d-8ae968dc7bcf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/atoms/Heading/Heading.stories.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.storybook/preview-head.html" beforeDir="false" afterPath="$PROJECT_DIR$/.storybook/preview-head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/MainTemplate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/MainTemplate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atoms/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/Heading/Heading.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atoms/Header/Header.stories.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/theme/GlobalStyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/GlobalStyle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/mainTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/mainTheme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +41,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/images/categories" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -55,12 +56,13 @@
     <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Projekty\shopping-list\src\assets\images\categories" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Projekty\shopping-list\src\templates" />
       <recent name="C:\Projekty\shopping-list\src\theme" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projekty\shopping-list\src\assets\images" />
+      <recent name="C:\Projekty\shopping-list\src\assets\images\categories" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -106,7 +108,8 @@
       <workItem from="1583866926599" duration="3528000" />
       <workItem from="1584994504385" duration="2349000" />
       <workItem from="1585077161796" duration="3709000" />
-      <workItem from="1585249812240" duration="3971000" />
+      <workItem from="1585249812240" duration="4410000" />
+      <workItem from="1585400665983" duration="4360000" />
     </task>
     <servers />
   </component>
@@ -122,6 +125,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="359" y="358" key="#File_Watchers/0.0.3440.1400@0.0.3440.1400" timestamp="1583870434673" />
+    <state x="359" y="358" key="#JavaScript" timestamp="1585401653305">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="359" y="358" key="#JavaScript/0.0.3440.1400@0.0.3440.1400" timestamp="1585401653305" />
     <state x="352" y="361" key="#Plugins" timestamp="1583180814947">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
