@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png';
 
 const StyledHeader = styled.div`
@@ -27,9 +28,12 @@ const Header = () => (
       <img src={logo} alt="Company name logo" />
     </Logo>
     <div>
-      <MenuItem href="/test">test</MenuItem>
-      <MenuItem href="/test">test 2</MenuItem>
-      <MenuItem href="/test">test 3</MenuItem>
+      <MenuItem as={Link} to="/">
+        Home
+      </MenuItem>
+      <MenuItem as={Link} to="/przepisy">
+        Przepisy
+      </MenuItem>
     </div>
   </StyledHeader>
 );

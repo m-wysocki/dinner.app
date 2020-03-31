@@ -10,4 +10,5 @@ export const theme = {
   },
   light: 400,
   bold: 500,
+  padding: '5vw',
 };

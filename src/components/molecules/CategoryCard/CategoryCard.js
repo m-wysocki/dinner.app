@@ -38,8 +38,8 @@ const Title = styled.span`
   font-weight: ${theme.bold};
 `;
 
-const CategoryCard = ({ name, slug, color }) => (
-  <StyledCategory as={Link} to={slug} color={color}>
+const CategoryCard = ({ name, slug }) => (
+  <StyledCategory as={Link} to={slug}>
     <Title>{name}</Title>
   </StyledCategory>
 );
