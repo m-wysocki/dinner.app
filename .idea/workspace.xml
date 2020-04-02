@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5fcb3a65-d45a-46a8-8c4d-8ae968dc7bcf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/CategoryCard/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/CategoryCard/CategoryCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/mainTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/mainTheme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/CategoriesView/CategoriesView.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +105,8 @@
       <workItem from="1585077161796" duration="3709000" />
       <workItem from="1585249812240" duration="4410000" />
       <workItem from="1585400665983" duration="4541000" />
-      <workItem from="1585679841315" duration="4404000" />
+      <workItem from="1585679841315" duration="4529000" />
+      <workItem from="1585853320594" duration="2746000" />
     </task>
     <servers />
   </component>
@@ -151,10 +146,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1981" y="345" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1585251261999" />
-    <state x="423" y="332" key="run.anything.popup" timestamp="1585681139167">
+    <state x="423" y="332" key="run.anything.popup" timestamp="1585854596350">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="423" y="332" key="run.anything.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1585681139167" />
+    <state x="423" y="332" key="run.anything.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1585854596350" />
     <state x="423" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1585251226635">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
