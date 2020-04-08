@@ -7,3 +7,12 @@ export const removeItem = (itemType, _id) => {
     },
   };
 };
+export const addItem = (itemType, itemContent) => {
+  return {
+    type: 'ADD_ITEM',
+    payload: {
+      itemType,
+      itemContent,
+    },
+  };
+};

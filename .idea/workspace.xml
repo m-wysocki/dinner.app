@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fcb3a65-d45a-46a8-8c4d-8ae968dc7bcf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/RecipeCard/RecipeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/RecipeCard/RecipeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/RecipesView/RecipesView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RecipesView/RecipesView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Root/Root.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Root/Root.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +110,8 @@
       <workItem from="1585400665983" duration="4541000" />
       <workItem from="1585679841315" duration="4529000" />
       <workItem from="1585853320594" duration="2843000" />
-      <workItem from="1586107619019" duration="7058000" />
+      <workItem from="1586107619019" duration="7432000" />
+      <workItem from="1586370863375" duration="3276000" />
     </task>
     <servers />
   </component>
