@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fcb3a65-d45a-46a8-8c4d-8ae968dc7bcf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/RecipeCard/RecipeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/RecipeCard/RecipeCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/RecipesView/RecipesView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RecipesView/RecipesView.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -13,9 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,7 +35,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -78,18 +80,6 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -111,12 +101,13 @@
       <workItem from="1585679841315" duration="4529000" />
       <workItem from="1585853320594" duration="2843000" />
       <workItem from="1586107619019" duration="7432000" />
-      <workItem from="1586370863375" duration="3276000" />
+      <workItem from="1586370863375" duration="3496000" />
+      <workItem from="1587310792854" duration="9569000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2072" y="361" key="#ESLint" timestamp="1583181590094">
@@ -151,6 +142,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1981" y="345" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1585251261999" />
+    <state x="474" y="435" width="585" height="530" key="find.popup" timestamp="1587320463650">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="474" y="435" width="585" height="530" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1587320463650" />
     <state x="423" y="332" key="run.anything.popup" timestamp="1585854596350">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>

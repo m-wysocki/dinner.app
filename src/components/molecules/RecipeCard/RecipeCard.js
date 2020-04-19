@@ -49,7 +49,7 @@ const StyledHeading = styled(Heading)`
   margin: 0;
 `;
 
-const RecipeCard = ({ _id, name, slug, img, removeRecipe }) => (
+const RecipeCard = ({ id, name, slug, img, removeRecipe }) => (
   <>
     <StyledRecipe as={Link} to={slug}>
       <Image>
@@ -59,20 +59,20 @@ const RecipeCard = ({ _id, name, slug, img, removeRecipe }) => (
         <StyledHeading>{name}</StyledHeading>
       </Content>
     </StyledRecipe>
-    <button type="button" onClick={() => removeRecipe('recipes', _id)}>
+    <button type="button" onClick={() => removeRecipe('recipes', id)}>
       usuń
     </button>
   </>
 );
 
 const mapDispatchToProp = dispatch => ({
-  removeRecipe: (itemType, _id) => dispatch(removeItem(itemType, _id)),
+  removeRecipe: (itemType, id) => dispatch(removeItem(itemType, id)),
 });
 
 export default connect(null, mapDispatchToProp)(RecipeCard);
 
 RecipeCard.propTypes = {
-  _id: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
