@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Heading from '../../components/atoms/Heading/Heading';
 import RecipeCard from '../../components/molecules/RecipeCard/RecipeCard';
-import { addItem } from '../../actions';
+import { addItem, fetchItems } from '../../actions';
 
-const RecipesView = ({ recipes, addRecipe }) => {
+const RecipesView = ({ recipes, addRecipe, fetchRecipes }) => {
   const { handleSubmit, register } = useForm();
   const handleAddRecipe = async values => {
     addRecipe('recipes', values);
   };
+  useEffect(() => {
+    fetchRecipes();
+  });
   return (
     <>
       <Heading big>Przepisy</Heading>
@@ -32,14 +35,16 @@ const RecipesView = ({ recipes, addRecipe }) => {
     </>
   );
 };
-const mapDispatchToProp = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   addRecipe: (itemType, itemContent) => dispatch(addItem(itemType, itemContent)),
+  fetchRecipes: () => dispatch(fetchItems('recipes')),
 });
 const mapStateToProps = ({ recipes }) => ({ recipes });
 
-export default connect(mapStateToProps, mapDispatchToProp)(RecipesView);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipesView);
 
 RecipesView.propTypes = {
+  fetchRecipes: PropTypes.func.isRequired,
   recipes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

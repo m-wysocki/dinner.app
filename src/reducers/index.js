@@ -1,15 +1,6 @@
-import { ADD_SUCCESS } from '../actions';
+import { ADD_SUCCESS, FETCH_SUCCESS } from '../actions';
 
-const initialState = {
-  recipes: [
-    {
-      id: '1',
-      name: 'Krem ze szparagów',
-      image:
-        'https://images.unsplash.com/photo-1584551109672-1c3d650eccb7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=640&q=80',
-    },
-  ],
-};
+const initialState = {};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -25,6 +16,10 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
+      };
+    case FETCH_SUCCESS:
+      return {
+        [action.payload.itemsType]: [...action.payload.items],
       };
     default:
       return state;

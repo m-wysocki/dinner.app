@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fcb3a65-d45a-46a8-8c4d-8ae968dc7bcf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/RecipeCard/RecipeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/RecipeCard/RecipeCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/RecipesView/RecipesView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RecipesView/RecipesView.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +97,8 @@
       <workItem from="1585853320594" duration="2843000" />
       <workItem from="1586107619019" duration="7432000" />
       <workItem from="1586370863375" duration="3496000" />
-      <workItem from="1587310792854" duration="9569000" />
+      <workItem from="1587310792854" duration="9767000" />
+      <workItem from="1587495362723" duration="3008000" />
     </task>
     <servers />
   </component>
@@ -142,10 +138,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1981" y="345" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1585251261999" />
-    <state x="474" y="435" width="585" height="530" key="find.popup" timestamp="1587320463650">
+    <state x="474" y="435" width="585" height="530" key="find.popup" timestamp="1587320475168">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="474" y="435" width="585" height="530" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1587320463650" />
+    <state x="474" y="435" width="585" height="530" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1587320475168" />
     <state x="423" y="332" key="run.anything.popup" timestamp="1585854596350">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
