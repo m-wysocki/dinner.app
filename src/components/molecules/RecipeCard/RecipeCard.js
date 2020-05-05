@@ -17,8 +17,6 @@ const StyledRecipe = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 300px;
-  height: auto;
   color: ${({ theme }) => theme.colors.text};
   border-radius: 10px;
   transition: box-shadow 0.3s ease-in-out;
@@ -47,10 +45,11 @@ const StyledHeading = styled(Heading)`
   font-size: 1.8rem;
   text-align: center;
   margin: 0;
+  word-break: break-word;
 `;
 
 const RecipeCard = ({ id, name, slug, img, removeRecipe }) => (
-  <>
+  <div>
     <StyledRecipe as={Link} to={slug}>
       <Image>
         <img src={img} alt={name} />
@@ -62,7 +61,7 @@ const RecipeCard = ({ id, name, slug, img, removeRecipe }) => (
     <button type="button" onClick={() => removeRecipe('recipes', id)}>
       usuń
     </button>
-  </>
+  </div>
 );
 
 const mapDispatchToProp = dispatch => ({

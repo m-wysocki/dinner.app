@@ -8,14 +8,18 @@ export const ADD_REQUEST = 'ADD_REQUEST';
 export const ADD_SUCCESS = 'ADD_SUCCESS';
 export const ADD_FAILURE = 'ADD_FAILURE';
 
+export const REMOVE_REQUEST = 'REMOVE_REQUEST';
+export const REMOVE_SUCCESS = 'REMOVE_SUCCESS';
+export const REMOVE_FAILURE = 'REMOVE_FAILURE';
+
 export const fetchItems = itemsType => async dispatch => {
   dispatch({ type: FETCH_REQUEST });
+  // console.log('test');
   return db
     .collection(itemsType)
     .get()
     .then(querySnapshot => {
       const items = [];
-      console.log(querySnapshot);
       querySnapshot.forEach(doc => {
         items.push({
           id: doc.id,
@@ -38,14 +42,25 @@ export const fetchItems = itemsType => async dispatch => {
       dispatch({ type: FETCH_FAILURE });
     });
 };
-export const removeItem = (itemType, id) => {
-  return {
-    type: 'REMOVE_ITEM',
-    payload: {
-      itemType,
-      id,
-    },
-  };
+export const removeItem = (itemType, id) => async dispatch => {
+  dispatch({ type: REMOVE_REQUEST });
+  return db
+    .collection(itemType)
+    .doc(id)
+    .delete()
+    .then(() => {
+      dispatch({
+        type: REMOVE_SUCCESS,
+        payload: {
+          itemType,
+          id,
+        },
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: REMOVE_FAILURE });
+    });
 };
 
 export const addItem = (itemType, itemContent) => async dispatch => {

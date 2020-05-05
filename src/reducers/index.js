@@ -1,10 +1,10 @@
-import { ADD_SUCCESS, FETCH_SUCCESS } from '../actions';
+import { ADD_SUCCESS, FETCH_SUCCESS, REMOVE_SUCCESS } from '../actions';
 
 const initialState = {};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'REMOVE_ITEM':
+    case REMOVE_SUCCESS:
       return {
         ...state,
         // [recipes]: [...state[recipes].filter(item => item.id !== 23) ]

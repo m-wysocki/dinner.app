@@ -1,10 +1,17 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Heading from '../../components/atoms/Heading/Heading';
 import RecipeCard from '../../components/molecules/RecipeCard/RecipeCard';
 import { addItem, fetchItems } from '../../actions';
+
+const RecipesList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 30px;
+`;
 
 const RecipesView = ({ recipes, addRecipe, fetchRecipes }) => {
   const { handleSubmit, register } = useForm();
@@ -13,13 +20,15 @@ const RecipesView = ({ recipes, addRecipe, fetchRecipes }) => {
   };
   useEffect(() => {
     fetchRecipes();
-  });
+  }, [fetchRecipes]);
   return (
     <>
       <Heading big>Przepisy</Heading>
-      {recipes.map(({ id, name, image }) => (
-        <RecipeCard key={id} id={id} slug={id} img={image} name={name} />
-      ))}
+      <RecipesList>
+        {recipes.map(({ id, name, image }) => (
+          <RecipeCard key={id} id={id} slug={id} img={image} name={name} />
+        ))}
+      </RecipesList>
       <Heading small>Dodaj nowy przepis</Heading>
       <form onSubmit={handleSubmit(handleAddRecipe)}>
         <input type="text" name="name" placeholder="name" ref={register} />
