@@ -14,7 +14,7 @@ export const REMOVE_FAILURE = 'REMOVE_FAILURE';
 
 export const fetchItems = itemsType => async dispatch => {
   dispatch({ type: FETCH_REQUEST });
-  // console.log('test');
+  // console.log('FETCH_REQUEST');
   return db
     .collection(itemsType)
     .get()

@@ -19,6 +19,7 @@ const rootReducer = (state = initialState, action) => {
       };
     case FETCH_SUCCESS:
       return {
+        ...state,
         [action.payload.itemsType]: [...action.payload.items],
       };
     default:
