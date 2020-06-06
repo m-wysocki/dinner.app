@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, fetchItems } from '../../../actions';
+import Input from '../Input/Input';
+import BreakLine from '../BreakLine/BreakLine';
+import * as S from './InputLiveSearchStyles';
 
 const InputLiveSearch = () => {
   const [search, setSearch] = useState('');
+  const [autocomplete, setAutocomplete] = useState(false);
   const categories = useSelector(state => state.categories);
   const dispatch = useDispatch();
   const inputEl = useRef(null);
@@ -12,7 +16,12 @@ const InputLiveSearch = () => {
   const addCategory = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
 
   const handleInputChange = e => {
+    searchIdInput.current.value = '';
     setSearch(e.target.value);
+  };
+
+  const handleInputFocus = e => {
+    setAutocomplete(true);
   };
 
   const handleAddCategory = () => {
@@ -24,6 +33,8 @@ const InputLiveSearch = () => {
     e.preventDefault();
     inputEl.current.value = name;
     searchIdInput.current.value = id;
+    setSearch('');
+    setAutocomplete(false);
   };
 
   useEffect(() => {
@@ -31,29 +42,43 @@ const InputLiveSearch = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <S.SearcherWrapper>
       <input name="id" type="hidden" ref={searchIdInput} />
-      <input
+      <S.SearchInput
+        as={Input}
         name="name"
         type="text"
         ref={inputEl}
-        placeholder="wyszukaj kategorię"
+        label="Wyszukaj kategorię"
         onChange={handleInputChange}
+        onFocus={handleInputFocus}
       />
-      {search && !categories.find(c => c.name === search) && (
-        <div onClick={handleAddCategory}>Dodaj nową kategorię - {search}</div>
+      {(autocomplete || search) && (
+        <S.SearchResultWrapper>
+          {search && search.length > 2 && !categories.find(c => c.name === search) && (
+            <>
+              <S.AddItemOption onClick={handleAddCategory}>
+                Dodaj nową kategorię: <S.AddItemName>{search}</S.AddItemName>
+              </S.AddItemOption>
+
+              {categories.filter(category =>
+                category.name.toLowerCase().match(search.toLowerCase()),
+              ).length > 0 && <BreakLine />}
+            </>
+          )}
+          <S.ItemsList>
+            {categories &&
+              categories
+                .filter(category => category.name.toLowerCase().match(search.toLowerCase()))
+                .map(({ id, name }) => (
+                  <S.Item key={id} onClick={e => handleResultClick(id, name, e)}>
+                    {name}
+                  </S.Item>
+                ))}
+          </S.ItemsList>
+        </S.SearchResultWrapper>
       )}
-      <ul>
-        {categories &&
-          categories
-            .filter(category => category.name.toLowerCase().match(search.toLowerCase()))
-            .map(({ id, name }) => (
-              <li key={id} onClick={e => handleResultClick(id, name, e)}>
-                {name}
-              </li>
-            ))}
-      </ul>
-    </>
+    </S.SearcherWrapper>
   );
 };
 export default InputLiveSearch;

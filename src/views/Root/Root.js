@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
 import store from '../../store';
 import Header from '../../components/organisms/Header/Header';
 import MainTemplate from '../../templates/MainTemplate';
