@@ -1,78 +1,82 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useFormikContext } from 'formik';
 import { addItem, fetchItems } from '../../../actions';
 import Input from '../Input/Input';
 import BreakLine from '../BreakLine/BreakLine';
 import * as S from './InputLiveSearchStyles';
 
-const InputLiveSearch = () => {
+const InputLiveSearch = ({ searchItems, label, name }) => {
+  const { values } = useFormikContext();
   const [search, setSearch] = useState('');
   const [autocomplete, setAutocomplete] = useState(false);
-  const categories = useSelector(state => state.categories);
+  const items = useSelector(state => state[searchItems]);
   const dispatch = useDispatch();
   const inputEl = useRef(null);
-  const searchIdInput = useRef(null);
 
   const addCategory = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
 
   const handleInputChange = e => {
-    searchIdInput.current.value = '';
+    values[name] = '';
     setSearch(e.target.value);
   };
 
-  const handleInputFocus = e => {
+  const handleInputFocus = () => {
     setAutocomplete(true);
   };
 
   const handleAddCategory = () => {
-    addCategory('categories', { name: search });
-    inputEl.current.value = '';
+    addCategory(searchItems, { name: search }).then(id => {
+      values[name] = id;
+      inputEl.current.value = search;
+      setSearch('');
+      setAutocomplete(false);
+    });
   };
 
-  const handleResultClick = (id, name, e) => {
+  const handleResultClick = (id, itemName, e) => {
     e.preventDefault();
-    inputEl.current.value = name;
-    searchIdInput.current.value = id;
+    values[name] = id;
+    inputEl.current.value = itemName;
     setSearch('');
     setAutocomplete(false);
   };
 
   useEffect(() => {
-    dispatch(fetchItems('categories'));
-  }, [dispatch]);
+    dispatch(fetchItems(searchItems));
+  }, [dispatch, searchItems]);
 
   return (
     <S.SearcherWrapper>
-      <input name="id" type="hidden" ref={searchIdInput} />
       <S.SearchInput
         as={Input}
-        name="name"
+        name={`${searchItems}-name`}
         type="text"
         ref={inputEl}
-        label="Wyszukaj kategorię"
+        label={label}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
       />
       {(autocomplete || search) && (
         <S.SearchResultWrapper>
-          {search && search.length > 2 && !categories.find(c => c.name === search) && (
+          {search && search.length > 2 && !items.find(c => c.name === search) && (
             <>
               <S.AddItemOption onClick={handleAddCategory}>
-                Dodaj nową kategorię: <S.AddItemName>{search}</S.AddItemName>
+                Dodaj: <S.AddItemName>{search}</S.AddItemName>
               </S.AddItemOption>
 
-              {categories.filter(category =>
-                category.name.toLowerCase().match(search.toLowerCase()),
-              ).length > 0 && <BreakLine />}
+              {items.filter(item => item.name.toLowerCase().match(search.toLowerCase())).length >
+                0 && <BreakLine />}
             </>
           )}
           <S.ItemsList>
-            {categories &&
-              categories
-                .filter(category => category.name.toLowerCase().match(search.toLowerCase()))
-                .map(({ id, name }) => (
-                  <S.Item key={id} onClick={e => handleResultClick(id, name, e)}>
-                    {name}
+            {items &&
+              items
+                .filter(item => item.name.toLowerCase().match(search.toLowerCase()))
+                .map(({ id, name: itemName }) => (
+                  <S.Item key={id} onClick={e => handleResultClick(id, itemName, e)}>
+                    {itemName}
                   </S.Item>
                 ))}
           </S.ItemsList>
@@ -82,3 +86,9 @@ const InputLiveSearch = () => {
   );
 };
 export default InputLiveSearch;
+
+InputLiveSearch.propTypes = {
+  label: PropTypes.string.isRequired,
+  searchItems: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};

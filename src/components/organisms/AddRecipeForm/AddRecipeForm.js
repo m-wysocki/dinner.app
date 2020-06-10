@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
@@ -15,29 +15,57 @@ const StyledInput = styled(Input)`
 const AddRecipeForm = () => {
   const itemsType = 'recipes';
   const dispatch = useDispatch();
-  const { handleSubmit, register } = useForm();
   const addRecipe = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
-
-  const handleAddRecipe = async values => {
-    addRecipe(itemsType, values);
-  };
 
   return (
     <div>
       <Heading small>Dodaj nowy przepis</Heading>
-      <form onSubmit={handleSubmit(handleAddRecipe)}>
-        <StyledInput as={Input} id="name" label="Tytuł" name="name" ref={register} />
-        <StyledInput
-          as={Input}
-          id="image"
-          label="Link do zdjęcia przepisu"
-          name="image"
-          ref={register}
-          defaultValue="https://images.unsplash.com/photo-1576444356170-66073046b1bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=640&q=80"
-        />
-        <InputLiveSearch searchType="categories" />
-        <button type="submit">dodaj</button>
-      </form>
+      <Formik
+        initialValues={{
+          name: '',
+          image:
+            'https://images.unsplash.com/photo-1576444356170-66073046b1bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=640&q=80',
+          categoryId: '',
+          bookId: '',
+        }}
+        onSubmit={values => {
+          addRecipe(itemsType, values);
+        }}
+      >
+        {() => (
+          <Form>
+            <Field name="name">
+              {({ field }) => (
+                <StyledInput as={Input} id="name" name="name" label="Tytuł" {...field} />
+              )}
+            </Field>
+            <Field name="image">
+              {({ field }) => (
+                <StyledInput
+                  as={Input}
+                  id="image"
+                  name="image"
+                  label="Link do zdjęcia przepisu"
+                  {...field}
+                />
+              )}
+            </Field>
+            <InputLiveSearch
+              id="categoryId"
+              name="categoryId"
+              searchItems="categories"
+              label="Wyszukaj kategorię"
+            />
+            <InputLiveSearch
+              id="bookId"
+              name="bookId"
+              searchItems="books"
+              label="Wyszukaj książkę"
+            />
+            <button type="submit">dodaj</button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

@@ -65,19 +65,16 @@ export const removeItem = (itemType, id) => async dispatch => {
 
 export const addItem = (itemType, itemContent) => async dispatch => {
   dispatch({ type: ADD_REQUEST });
-  console.log('1');
   return db
     .collection(itemType)
     .add(itemContent)
     .then(({ id }) => {
-      console.log('2');
       return db
         .collection(itemType)
         .doc(id)
         .get();
     })
     .then(doc => {
-      console.log('3');
       dispatch({
         type: ADD_SUCCESS,
         payload: {
@@ -88,6 +85,7 @@ export const addItem = (itemType, itemContent) => async dispatch => {
           },
         },
       });
+      return doc.id;
     })
     .catch(err => {
       console.log(err);
