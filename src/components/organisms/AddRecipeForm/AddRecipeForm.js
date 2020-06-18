@@ -26,6 +26,7 @@ const AddRecipeForm = () => {
           image:
             'https://images.unsplash.com/photo-1576444356170-66073046b1bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=640&q=80',
           categoryId: '',
+          sourceType: '',
           bookId: '',
         }}
         onSubmit={values => {
@@ -56,6 +57,7 @@ const AddRecipeForm = () => {
               searchItems="categories"
               label="Wyszukaj kategorię"
             />
+
             <InputLiveSearch
               id="bookId"
               name="bookId"
