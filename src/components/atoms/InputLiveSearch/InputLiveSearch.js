@@ -60,7 +60,7 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
       />
       {(autocomplete || search) && (
         <S.SearchResultWrapper>
-          {search && search.length > 2 && !items.find(c => c.name === search) && (
+          {search && search.length > 0 && !items.find(c => c.name === search) && (
             <>
               <S.AddItemOption onClick={handleAddCategory}>
                 Dodaj: <S.AddItemName>{search}</S.AddItemName>

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Heading from '../../components/atoms/Heading/Heading';
 import RecipeCard from '../../components/molecules/RecipeCard/RecipeCard';
 import { fetchItems } from '../../actions';
-import AddRecipeForm from '../../components/organisms/AddRecipeForm/AddRecipeForm';
 
 const RecipesList = styled.div`
   display: grid;
@@ -31,7 +30,6 @@ const RecipesView = () => {
             <RecipeCard key={id} id={id} slug={id} img={image} name={name} />
           ))}
       </RecipesList>
-      <AddRecipeForm />
     </>
   );
 };
