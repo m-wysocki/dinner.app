@@ -5,7 +5,7 @@ export const SearcherWrapper = styled.div`
 `;
 export const SearchInput = styled.div`
   margin-bottom: 0;
-  background-color: red;
+  //background-color: red;
 `;
 export const SearchResultWrapper = styled.div`
   background-color: #f6f9fc;

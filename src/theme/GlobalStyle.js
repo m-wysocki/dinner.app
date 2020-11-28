@@ -22,6 +22,16 @@ const GlobalStyle = createGlobalStyle`
   img{
     max-width: 100%;
   }
+  .isModalOpen::after {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.7);
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 `;
 
 export default GlobalStyle;

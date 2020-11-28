@@ -14,6 +14,7 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
   const items = useSelector(state => state[searchItems]);
   const dispatch = useDispatch();
   const inputEl = useRef(null);
+  const wrapperRef = useRef(null);
 
   const addCategory = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
 
@@ -45,10 +46,19 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
 
   useEffect(() => {
     dispatch(fetchItems(searchItems));
-  }, [dispatch, searchItems]);
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setAutocomplete(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dispatch, searchItems, wrapperRef]);
 
   return (
-    <S.SearcherWrapper>
+    <S.SearcherWrapper ref={wrapperRef}>
       <S.SearchInput
         as={Input}
         name={`${searchItems}-name`}

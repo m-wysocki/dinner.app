@@ -56,6 +56,7 @@ export const StyledInput = styled.input`
   border: none;
   width: 100%;
   border-bottom: 1px solid #d5d5d5;
+  background-color: transparent;
 
   &:focus {
     outline: none;

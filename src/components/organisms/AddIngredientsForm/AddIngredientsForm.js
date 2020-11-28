@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import Input from '../../atoms/Input/Input';
 import InputLiveSearch from '../../atoms/InputLiveSearch/InputLiveSearch';
 import { addItem } from '../../../actions';
+import Heading from '../../atoms/Heading/Heading';
 
 const AddIngredientsForm = () => {
   const itemsType = 'ingredients';
@@ -12,7 +13,7 @@ const AddIngredientsForm = () => {
 
   return (
     <div>
-      <h3>Dodaj składniki do bazy</h3>
+      <Heading>Dodaj składniki do bazy</Heading>
       <Formik
         initialValues={{
           name: '',
