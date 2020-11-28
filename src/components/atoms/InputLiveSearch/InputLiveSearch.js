@@ -44,18 +44,23 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
     setAutocomplete(false);
   };
 
+  const handleClickOutside = event => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setAutocomplete(false);
+    }
+  };
+
   useEffect(() => {
     dispatch(fetchItems(searchItems));
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setAutocomplete(false);
-      }
+    if (autocomplete) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
     }
-    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dispatch, searchItems, wrapperRef]);
+  }, [dispatch, searchItems, wrapperRef, autocomplete]);
 
   return (
     <S.SearcherWrapper ref={wrapperRef}>

@@ -7,17 +7,21 @@ import * as S from './ModalStyles';
 const Modal = ({ children, isModalOpen, toggleModal }) => {
   const wrapperRef = useRef(null);
 
-  // useEffect(() => {
-  //   function handleClickOutside(event) {
-  //     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-  //       toggleModal();
-  //     }
-  //   }
-  //   document.addEventListener('mousedown', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, [wrapperRef]);
+  const handleClickOutside = event => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      toggleModal();
+    }
+  };
+  useEffect(() => {
+    if (isModalOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isModalOpen]);
 
   return isModalOpen
     ? ReactDOM.createPortal(

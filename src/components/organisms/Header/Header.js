@@ -2,11 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png';
 import { StyledHeader, MenuItem } from './HeaderStyles';
-import useModal from '../../../hooks/useModal';
-import Modal from '../Modal/Modal';
 
 const Header = () => {
-  const { isModalOpen, toggleModal } = useModal();
   return (
     <StyledHeader>
       <Link to="/">
@@ -19,16 +16,10 @@ const Header = () => {
         <MenuItem as={Link} to="/przepisy">
           Przepisy
         </MenuItem>
-        <MenuItem as={Link} to="/dodaj-przepis">
-          Dodaj przepis
-        </MenuItem>
       </div>
-      <button type="button" onClick={toggleModal}>
-        dodaj przepis
-      </button>
-      <Modal isModalOpen={isModalOpen} toggleModal={toggleModal}>
-        <p>a</p>
-      </Modal>
+      <MenuItem as={Link} to="/dodaj-przepis">
+        Dodaj przepis
+      </MenuItem>
     </StyledHeader>
   );
 };
