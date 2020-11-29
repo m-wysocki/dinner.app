@@ -15,8 +15,8 @@ const RecipesList = styled.div`
 const RecipesView = () => {
   const itemsType = 'recipes';
 
-  const recipes = useSelector(state => state.recipes);
   const dispatch = useDispatch();
+  const recipes = useSelector(state => state.recipes);
 
   useEffect(() => {
     dispatch(fetchItems(itemsType));
@@ -26,8 +26,8 @@ const RecipesView = () => {
       <Heading big>Przepisy</Heading>
       <RecipesList>
         {recipes &&
-          recipes.map(({ id, name, image }) => (
-            <RecipeCard key={id} id={id} slug={id} img={image} name={name} />
+          recipes.map(({ id, slug, name, image }) => (
+            <RecipeCard key={id} id={id} slug={slug} img={image} name={name} />
           ))}
       </RecipesList>
     </>

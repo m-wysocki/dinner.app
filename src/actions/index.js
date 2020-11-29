@@ -42,6 +42,7 @@ export const fetchItems = itemsType => async dispatch => {
       dispatch({ type: FETCH_FAILURE });
     });
 };
+
 export const removeItem = (itemType, id) => async dispatch => {
   dispatch({ type: REMOVE_REQUEST });
   return db

@@ -8,7 +8,7 @@ import { StyledRecipe, Image, Content, StyledHeading } from './RecipeCardStyles'
 
 const RecipeCard = ({ id, name, slug, img, removeRecipe }) => (
   <div>
-    <StyledRecipe as={Link} to={slug}>
+    <StyledRecipe as={Link} to={`/przepisy/${id}/${slug}`}>
       <Image>
         <img src={img} alt={name} />
       </Image>

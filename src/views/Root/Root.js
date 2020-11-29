@@ -9,6 +9,7 @@ import MainTemplate from '../../templates/MainTemplate';
 import HomepageView from '../HomepageView/HomepageView';
 import RecipesView from '../RecipesView/RecipesView';
 import AddRecipeView from '../AddRecipeView/AddRecipeView';
+import SingleRecipeView from '../SingleRecipeView/SingleRecipeView';
 
 const ViewsContainer = styled.div`
   padding: 0 ${({ theme }) => theme.padding};
@@ -29,13 +30,10 @@ const Root = () => {
             </StyledHeader>
             <ViewsContainer>
               <Switch>
-                <Route exact path="/" component={() => <HomepageView />} />
-                <Route path="/przepisy">
-                  <RecipesView />
-                </Route>
-                <Route path="/dodaj-przepis">
-                  <AddRecipeView />
-                </Route>
+                <Route exact path="/" component={HomepageView} />
+                <Route path="/przepisy/:id/:slug" component={SingleRecipeView} />
+                <Route exact path="/przepisy" component={RecipesView} />
+                <Route path="/dodaj-przepis" component={AddRecipeView} />
               </Switch>
             </ViewsContainer>
           </>

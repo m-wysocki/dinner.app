@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import slugify from 'react-slugify';
 import FormikWizard from '../FormikWizard/FormikWizard';
 import FormikWizardStep from '../FormikWizardStep/FormikWizardStep';
 import { addItem } from '../../../actions';
@@ -23,8 +24,11 @@ const AddRecipeMultiStepForm = () => {
         link: '',
         preparationTime: '',
         ingredients: [],
+        slug: '',
       }}
       onSubmit={values => {
+        // eslint-disable-next-line no-param-reassign
+        values.slug = slugify(values.name);
         addRecipe(itemsType, values);
       }}
     >
