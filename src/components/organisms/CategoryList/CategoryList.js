@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import CategoryCard from '../../molecules/CategoryCard/CategoryCard';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from '../../../actions';
-import RecipeCard from '../../molecules/RecipeCard/RecipeCard';
+import useFetchItems from '../../../hooks/useFetchItems';
 
 const StyledList = styled.div`
   display: grid;
@@ -11,18 +9,13 @@ const StyledList = styled.div`
 `;
 
 const CategoryList = () => {
-  const itemsType = 'categories';
-
-  const dispatch = useDispatch();
-  const categories = useSelector(state => state.categories);
-
-  useEffect(() => {
-    dispatch(fetchItems(itemsType));
-  }, [dispatch]);
+  const categories = useFetchItems('categories');
   return (
     <StyledList>
       {categories &&
-        categories.map(({ id, name }) => <CategoryCard key={id} id={id} slug={id} name={name} />)}
+        categories.map(({ id, name, slug }) => (
+          <CategoryCard key={id} id={id} slug={slug} name={name} />
+        ))}
     </StyledList>
   );
 };

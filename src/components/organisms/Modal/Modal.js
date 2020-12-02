@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { GrFormClose } from 'react-icons/gr';
@@ -7,11 +7,15 @@ import * as S from './ModalStyles';
 const Modal = ({ children, isModalOpen, toggleModal }) => {
   const wrapperRef = useRef(null);
 
-  const handleClickOutside = event => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      toggleModal();
-    }
-  };
+  const handleClickOutside = useCallback(
+    event => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        toggleModal();
+      }
+    },
+    [toggleModal],
+  );
+
   useEffect(() => {
     if (isModalOpen) {
       document.addEventListener('mousedown', handleClickOutside);
@@ -21,7 +25,7 @@ const Modal = ({ children, isModalOpen, toggleModal }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, handleClickOutside]);
 
   return isModalOpen
     ? ReactDOM.createPortal(
@@ -38,6 +42,7 @@ const Modal = ({ children, isModalOpen, toggleModal }) => {
 
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };
 

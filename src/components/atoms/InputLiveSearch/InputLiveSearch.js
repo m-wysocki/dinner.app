@@ -1,17 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import slugify from 'react-slugify';
 import PropTypes from 'prop-types';
 import { useFormikContext } from 'formik';
-import { addItem, fetchItems } from '../../../actions';
+import { addItem } from '../../../actions';
 import Input from '../Input/Input';
 import BreakLine from '../BreakLine/BreakLine';
 import * as S from './InputLiveSearchStyles';
+import useFetchItems from '../../../hooks/useFetchItems';
 
 const InputLiveSearch = ({ searchItems, label, name }) => {
   const { values } = useFormikContext();
   const [search, setSearch] = useState('');
   const [autocomplete, setAutocomplete] = useState(false);
-  const items = useSelector(state => state[searchItems]);
+  const items = useFetchItems(searchItems);
   const dispatch = useDispatch();
   const inputEl = useRef(null);
   const wrapperRef = useRef(null);
@@ -28,7 +30,7 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
   };
 
   const handleAddCategory = () => {
-    addCategory(searchItems, { name: search }).then(id => {
+    addCategory(searchItems, { name: search, slug: slugify(search) }).then(id => {
       values[name] = id;
       inputEl.current.value = search;
       setSearch('');
@@ -51,7 +53,6 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchItems(searchItems));
     if (autocomplete) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
@@ -60,7 +61,7 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dispatch, searchItems, wrapperRef, autocomplete]);
+  }, [searchItems, wrapperRef, autocomplete]);
 
   return (
     <S.SearcherWrapper ref={wrapperRef}>

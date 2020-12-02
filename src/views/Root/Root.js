@@ -10,6 +10,7 @@ import HomepageView from '../HomepageView/HomepageView';
 import RecipesView from '../RecipesView/RecipesView';
 import AddRecipeView from '../AddRecipeView/AddRecipeView';
 import SingleRecipeView from '../SingleRecipeView/SingleRecipeView';
+import SingleCategoryView from '../SingleCategoryView/SingleCategoryView';
 
 const ViewsContainer = styled.div`
   padding: 0 ${({ theme }) => theme.padding};
@@ -32,6 +33,7 @@ const Root = () => {
               <Switch>
                 <Route exact path="/" component={HomepageView} />
                 <Route path="/przepisy/:id/:slug" component={SingleRecipeView} />
+                <Route path="/kategorie/:id/:slug" component={SingleCategoryView} />
                 <Route exact path="/przepisy" component={RecipesView} />
                 <Route path="/dodaj-przepis" component={AddRecipeView} />
               </Switch>

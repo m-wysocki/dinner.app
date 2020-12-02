@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Formik } from 'formik';
 
 const FormikWizard = ({ children, ...props }) => {
@@ -40,3 +41,7 @@ const FormikWizard = ({ children, ...props }) => {
 };
 
 export default FormikWizard;
+
+FormikWizard.propTypes = {
+  children: PropTypes.node.isRequired,
+};

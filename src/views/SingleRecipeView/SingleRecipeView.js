@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from '../../actions';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Loader from '../../components/atoms/Loader/Loader';
+import useFechItemsByParam from '../../hooks/useFechItemsByParam';
 
 const SingleRecipeView = ({ match }) => {
   const { params } = match;
-  const itemsType = 'recipes';
-
-  const recipes = useSelector(state => state.recipes);
-  const dispatch = useDispatch();
-  const recipe = recipes ? recipes.filter(recipeItem => recipeItem.id === params.id)[0] : null;
+  const recipe = useFechItemsByParam('recipes', 'id', params.id)[0];
   const recipeTest = recipe ? Object.keys(recipe) : null;
 
-  useEffect(() => {
-    dispatch(fetchItems(itemsType));
-  }, [dispatch]);
-
-  if (!recipe) return <p>Ładuję...</p>;
+  if (!recipe) return <Loader />;
   return (
     <div>
       {recipe ? (
@@ -23,14 +16,19 @@ const SingleRecipeView = ({ match }) => {
           <h1>{recipe.name}</h1>
           <ul>
             {recipeTest &&
-              recipeTest.map(r => (
-                <li key={r}>
-                  <p>
-                    <i>{r} => </i>
-                    <b>{recipe[r]}</b>
-                  </p>
-                </li>
-              ))}
+              // eslint-disable-next-line array-callback-return
+              recipeTest.map(r => {
+                if (r !== 'ingredients') {
+                  return (
+                    <li key={r}>
+                      <p>
+                        <i>{r} &gt; </i>
+                        <b>{recipe[r]}</b>
+                      </p>
+                    </li>
+                  );
+                }
+              })}
           </ul>
         </div>
       ) : (
@@ -41,3 +39,12 @@ const SingleRecipeView = ({ match }) => {
 };
 
 export default SingleRecipeView;
+
+SingleRecipeView.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};

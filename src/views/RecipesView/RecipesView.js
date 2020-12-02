@@ -1,35 +1,15 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 
 import Heading from '../../components/atoms/Heading/Heading';
-import RecipeCard from '../../components/molecules/RecipeCard/RecipeCard';
-import { fetchItems } from '../../actions';
-
-const RecipesList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 30px;
-`;
+import RecipesList from '../../components/organisms/RecipesList/RecipesList';
+import useFetchItems from '../../hooks/useFetchItems';
 
 const RecipesView = () => {
-  const itemsType = 'recipes';
-
-  const dispatch = useDispatch();
-  const recipes = useSelector(state => state.recipes);
-
-  useEffect(() => {
-    dispatch(fetchItems(itemsType));
-  }, [dispatch]);
+  const recipes = useFetchItems('recipes');
   return (
     <>
       <Heading big>Przepisy</Heading>
-      <RecipesList>
-        {recipes &&
-          recipes.map(({ id, slug, name, image }) => (
-            <RecipeCard key={id} id={id} slug={slug} img={image} name={name} />
-          ))}
-      </RecipesList>
+      <RecipesList recipes={recipes} />
     </>
   );
 };
