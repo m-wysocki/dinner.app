@@ -6,6 +6,7 @@ import Heading from '../../components/atoms/Heading/Heading';
 import SubpageTemplate from '../../templates/SubpageTemplate';
 import * as S from './SingleRecipeViewStyles';
 import StyledLink from '../../components/atoms/StyledLink/StyledLink';
+import emptyPlateImage from '../../assets/images/empty-plate.jpg';
 
 const SingleRecipeView = ({ match }) => {
   const { params } = match;
@@ -27,7 +28,7 @@ const SingleRecipeView = ({ match }) => {
         <>
           <Heading thin>{recipe.name}</Heading>
           <S.Wrapper>
-            <img src={recipe.image} alt={recipe.name} />
+            <img src={recipe.image || emptyPlateImage} alt={recipe.name} />
             <div>
               <S.Info>
                 <Heading small>Recipe information</Heading>

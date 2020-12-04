@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from './mainTheme';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,900&display=swap');
@@ -33,6 +34,18 @@ const GlobalStyle = createGlobalStyle`
     bottom: 0;
     left: 0;
     right: 0;
+  }
+  .Toastify__toast-container {
+    width: 400px;
+    max-width: 95vw;
+    text-align: center;
+  }
+  .Toastify__toast--success {
+    background: ${theme.colors.green};
+    color: ${theme.colors.text};
+  }
+  .Toastify__close-button {
+    color: ${theme.colors.text};
   }
 `;
 

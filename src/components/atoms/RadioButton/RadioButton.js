@@ -2,10 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as S from './RadioButton.styles';
 
-const RadioButton = ({ id, label, value, checked }) => {
+const RadioButton = ({ field: { name, value, onChange, onBlur }, id, label, ...props }) => {
   return (
     <S.Label htmlFor={id}>
-      <S.Input id={id} type="radio" name="radios" value={value} defaultChecked={checked} />
+      <S.Input
+        name={name}
+        id={id}
+        type="radio"
+        value={id}
+        checked={id === value}
+        onChange={onChange}
+        onBlur={onBlur}
+        {...props}
+      />
       <S.Outer>
         <S.Inner />
       </S.Outer>
@@ -19,9 +28,5 @@ export default RadioButton;
 RadioButton.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  checked: PropTypes.bool,
-};
-RadioButton.defaultProps = {
-  checked: false,
+  field: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func])),
 };

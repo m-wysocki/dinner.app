@@ -12,9 +12,16 @@ export const AddIngredient = styled.div`
   justify-content: flex-start;
 `;
 
+export const IngredientWrapper = styled.div`
+  margin-left: 2rem;
+  position: relative;
+  &:first-of-type {
+    margin-left: 0;
+  }
+`;
+
 export const StyledInput = styled.input`
   margin-bottom: 0;
-  margin-left: 2rem;
 `;
 
 export const Unit = styled.div`

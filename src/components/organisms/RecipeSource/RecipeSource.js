@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Field } from 'formik';
+import React from 'react';
+import { Field, useFormikContext } from 'formik';
 import styled from 'styled-components';
 import RadioButton from '../../atoms/RadioButton/RadioButton';
 import Input from '../../atoms/Input/Input';
@@ -18,26 +18,23 @@ const SourceLabel = styled.p`
 `;
 
 const RecipeSource = () => {
-  const [sourceType, setSourceType] = useState('link');
-  const handleSourceTypeChange = e => {
-    setSourceType(e.target.value);
-  };
+  const { values } = useFormikContext();
   return (
     <>
       <Heading small mb="6rem">
         Source information
       </Heading>
-      <SourceType onChange={handleSourceTypeChange}>
+      <SourceType>
         <SourceLabel>Source:</SourceLabel>
-        <RadioButton label="link" id="link" value="link" checked />
-        <RadioButton label="book" id="book" value="book" />
+        <Field component={RadioButton} name="sourceType" id="link" label="link" />
+        <Field component={RadioButton} name="sourceType" id="book" label="book" />
       </SourceType>
-      {sourceType === 'link' && (
+      {values.sourceType === 'link' && (
         <Field name="link">
           {({ field }) => <Input id="link" name="link" label="Recipe link" {...field} />}
         </Field>
       )}
-      {sourceType === 'book' && (
+      {values.sourceType === 'book' && (
         <>
           <InputLiveSearch id="bookId" name="bookId" searchItems="books" label="Search book" />
           <Field name="bookSite">

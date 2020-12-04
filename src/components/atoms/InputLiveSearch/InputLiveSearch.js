@@ -8,6 +8,7 @@ import Input from '../Input/Input';
 import BreakLine from '../BreakLine/BreakLine';
 import * as S from './InputLiveSearchStyles';
 import useFetchItems from '../../../hooks/useFetchItems';
+import useFechItemsByParam from '../../../hooks/useFechItemsByParam';
 
 const InputLiveSearch = ({ searchItems, label, name }) => {
   const { values } = useFormikContext();
@@ -19,6 +20,8 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
   const wrapperRef = useRef(null);
 
   const addCategory = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
+
+  const activeItem = useFechItemsByParam(searchItems, 'id', values[name])[0];
 
   const handleInputChange = e => {
     values[name] = '';
@@ -53,6 +56,9 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
   };
 
   useEffect(() => {
+    if (activeItem) {
+      inputEl.current.value = activeItem.name;
+    }
     if (autocomplete) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
@@ -61,7 +67,7 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [searchItems, wrapperRef, autocomplete]);
+  }, [activeItem, searchItems, wrapperRef, autocomplete]);
 
   return (
     <S.SearcherWrapper ref={wrapperRef}>

@@ -34,6 +34,7 @@ const FormikWizard = ({ children, ...props }) => {
   return (
     <Formik
       {...props}
+      validationSchema={currentChild.props.validationSchema}
       onSubmit={(values, helpers) => {
         if (isLastStep()) {
           props.onSubmit(values, helpers);
@@ -61,7 +62,7 @@ const FormikWizard = ({ children, ...props }) => {
             {isLastStep() ? (
               <>
                 <GrFormAdd />
-                add
+                add recipe
               </>
             ) : (
               <>
@@ -80,4 +81,5 @@ export default FormikWizard;
 
 FormikWizard.propTypes = {
   children: PropTypes.node.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

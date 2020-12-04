@@ -7,6 +7,7 @@ import Heading from '../../atoms/Heading/Heading';
 import { removeItem } from '../../../actions';
 import * as S from './RecipeCardStyles';
 import useFechItemsByParam from '../../../hooks/useFechItemsByParam';
+import emptyPlateImage from '../../../assets/images/empty-plate.jpg';
 
 const RecipeCard = ({ recipe, removeRecipe }) => {
   const { id, slug, name, image, preparationTime, categoryId, bookId } = recipe;
@@ -17,7 +18,7 @@ const RecipeCard = ({ recipe, removeRecipe }) => {
   return (
     <S.StyledRecipe>
       <S.Image>
-        <img src={image} alt={name} />
+        <img src={image || emptyPlateImage} alt={name} />
       </S.Image>
       <S.Content>
         <S.StyledHeading as={Heading}>{name}</S.StyledHeading>
