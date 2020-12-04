@@ -4,7 +4,7 @@ import slugify from 'react-slugify';
 import FormikWizard from '../FormikWizard/FormikWizard';
 import FormikWizardStep from '../FormikWizardStep/FormikWizardStep';
 import { addItem } from '../../../actions';
-import RecipeMainInformation from '../RecipeMainInformation/RecipeMainInformation';
+import RecipeBasicInformation from '../RecipeMainInformation/RecipeBasicInformation';
 import RecipeSource from '../RecipeSource/RecipeSource';
 import RecipeChooseIngredients from '../RecipeChooseIngredients/RecipeChooseIngredients';
 
@@ -33,7 +33,7 @@ const AddRecipeMultiStepForm = () => {
       }}
     >
       <FormikWizardStep>
-        <RecipeMainInformation />
+        <RecipeBasicInformation />
       </FormikWizardStep>
 
       <FormikWizardStep>

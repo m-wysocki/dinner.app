@@ -8,9 +8,10 @@ export const StyledCategory = styled.div`
   width: 250px;
   height: 125px;
   color: ${theme.colors.text};
-  border-radius: 10px;
+  border-radius: 1rem;
   transition: background-color 0.3s ease-in-out;
   overflow: hidden;
+  padding: 15px;
   &:nth-of-type(5n + 1) {
     background: ${theme.colors.yellow};
   }
@@ -27,11 +28,13 @@ export const StyledCategory = styled.div`
     background: ${theme.colors.violet};
   }
   &:hover {
-    background-color: ${theme.colors.main};
+    background-color: ${theme.colors.green};
   }
 `;
 
 export const Title = styled.span`
-  font-size: 2.2rem;
-  font-weight: ${theme.bold};
+  font-size: 2rem;
+  font-weight: ${theme.regular};
+  text-align: center;
+  text-transform: lowercase;
 `;

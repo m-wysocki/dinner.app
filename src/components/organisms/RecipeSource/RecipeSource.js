@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import RadioButton from '../../atoms/RadioButton/RadioButton';
 import Input from '../../atoms/Input/Input';
 import InputLiveSearch from '../../atoms/InputLiveSearch/InputLiveSearch';
+import Heading from '../../atoms/Heading/Heading';
 
 const SourceType = styled.div`
   display: flex;
@@ -23,22 +24,25 @@ const RecipeSource = () => {
   };
   return (
     <>
+      <Heading small mb="6rem">
+        Source information
+      </Heading>
       <SourceType onChange={handleSourceTypeChange}>
-        <SourceLabel>Źródło:</SourceLabel>
+        <SourceLabel>Source:</SourceLabel>
         <RadioButton label="link" id="link" value="link" checked />
-        <RadioButton label="książka" id="book" value="book" />
+        <RadioButton label="book" id="book" value="book" />
       </SourceType>
       {sourceType === 'link' && (
         <Field name="link">
-          {({ field }) => <Input id="link" name="link" label="Link do przepisu" {...field} />}
+          {({ field }) => <Input id="link" name="link" label="Recipe link" {...field} />}
         </Field>
       )}
       {sourceType === 'book' && (
         <>
-          <InputLiveSearch id="bookId" name="bookId" searchItems="books" label="Wyszukaj książkę" />
+          <InputLiveSearch id="bookId" name="bookId" searchItems="books" label="Search book" />
           <Field name="bookSite">
             {({ field }) => (
-              <Input id="bookSite" name="bookSite" label="Strona przepisu" {...field} />
+              <Input id="bookSite" name="bookSite" label="Recipe page in the book" {...field} />
             )}
           </Field>
         </>

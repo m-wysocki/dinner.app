@@ -1,27 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/images/logo.png';
+import PropTypes from 'prop-types';
 import { StyledHeader, MenuItem } from './HeaderStyles';
+import Logo from '../../atoms/Logo/Logo';
 
-const Header = () => {
+const Header = ({ subpage }) => {
   return (
-    <StyledHeader>
+    <StyledHeader subpage={subpage}>
       <Link to="/">
-        <img src={logo} alt="Company name logo" />
+        <Logo />
       </Link>
       <div>
         <MenuItem as={Link} to="/">
-          Home
+          home
         </MenuItem>
-        <MenuItem as={Link} to="/przepisy">
-          Przepisy
+        <MenuItem as={Link} to="/recipes">
+          recipes
+        </MenuItem>
+        <MenuItem as={Link} to="/add-recipe">
+          add recipe
         </MenuItem>
       </div>
-      <MenuItem as={Link} to="/dodaj-przepis">
-        Dodaj przepis
-      </MenuItem>
     </StyledHeader>
   );
 };
 
 export default Header;
+
+Header.propTypes = {
+  subpage: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  subpage: false,
+};

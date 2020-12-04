@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Hero from '../../components/organisms/Hero/Hero';
 import Heading from '../../components/atoms/Heading/Heading';
 import CategoryList from '../../components/organisms/CategoryList/CategoryList';
+import HomepageTemplate from '../../templates/HomepageTemplate';
 
 const StyledHero = styled.div`
   margin-bottom: 75px;
@@ -10,13 +11,13 @@ const StyledHero = styled.div`
 
 const HomepageView = () => {
   return (
-    <>
+    <HomepageTemplate>
       <StyledHero>
         <Hero />
       </StyledHero>
-      <Heading>Kategorie</Heading>
+      <Heading thin>categories</Heading>
       <CategoryList />
-    </>
+    </HomepageTemplate>
   );
 };
 

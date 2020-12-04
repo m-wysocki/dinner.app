@@ -5,6 +5,7 @@ import Input from '../../atoms/Input/Input';
 import InputLiveSearch from '../../atoms/InputLiveSearch/InputLiveSearch';
 import { addItem } from '../../../actions';
 import Heading from '../../atoms/Heading/Heading';
+import Button from '../../atoms/Button/Button';
 
 const AddIngredientsForm = () => {
   const itemsType = 'ingredients';
@@ -13,7 +14,7 @@ const AddIngredientsForm = () => {
 
   return (
     <div>
-      <Heading>Dodaj składniki do bazy</Heading>
+      <Heading small>Add new ingredient</Heading>
       <Formik
         initialValues={{
           name: '',
@@ -27,21 +28,23 @@ const AddIngredientsForm = () => {
         {() => (
           <Form>
             <Field name="name">
-              {({ field }) => <Input id="name" name="name" label="Tytuł" {...field} />}
+              {({ field }) => <Input id="name" name="name" label="Name" {...field} />}
             </Field>
             <InputLiveSearch
               id="unitId"
               name="unitId"
               searchItems="units"
-              label="Wyszukaj jednostkę"
+              label="Search for a unit"
             />
             <InputLiveSearch
               id="shopCategoryId"
               name="shopCategoryId"
               searchItems="shopCategories"
-              label="Wyszukaj kategorię sklepową"
+              label="Search shop category"
             />
-            <button type="submit">dodaj składnik do bazy</button>
+            <Button small type="submit">
+              add
+            </Button>
           </Form>
         )}
       </Formik>

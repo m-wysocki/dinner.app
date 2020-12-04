@@ -1,6 +1,26 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { GrFormAdd, GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import { Form, Formik } from 'formik';
+import Button from '../../atoms/Button/Button';
+
+const StyledButtons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 4rem;
+`;
+const StyledButton = styled(Button)`
+  margin-right: 2rem;
+  svg {
+    fill: #fff;
+    path,
+    polyline {
+      stroke: #fff;
+    }
+  }
+`;
 
 const FormikWizard = ({ children, ...props }) => {
   const childrenArray = React.Children.toArray(children);
@@ -24,17 +44,33 @@ const FormikWizard = ({ children, ...props }) => {
     >
       <Form>
         {currentChild}
-        {step > 0 && (
-          <button
-            type="button"
-            onClick={() => {
-              setStep(step => step - 1);
-            }}
-          >
-            wstecz
-          </button>
-        )}
-        <button type="submit">{isLastStep() ? 'dodaj' : 'dalej'}</button>
+        <StyledButtons>
+          {step > 0 && (
+            <StyledButton
+              small
+              type="button"
+              onClick={() => {
+                setStep(step => step - 1);
+              }}
+            >
+              <GrFormPrevious />
+              back
+            </StyledButton>
+          )}
+          <StyledButton small type="submit">
+            {isLastStep() ? (
+              <>
+                <GrFormAdd />
+                add
+              </>
+            ) : (
+              <>
+                next
+                <GrFormNext />
+              </>
+            )}
+          </StyledButton>
+        </StyledButtons>
       </Form>
     </Formik>
   );

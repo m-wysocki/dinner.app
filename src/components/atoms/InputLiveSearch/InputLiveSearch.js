@@ -79,7 +79,7 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
           {search && search.length > 0 && !items.find(c => c.name === search) && (
             <>
               <S.AddItemOption onClick={handleAddCategory}>
-                Dodaj: <S.AddItemName>{search}</S.AddItemName>
+                Add: <S.AddItemName>{search}</S.AddItemName>
               </S.AddItemOption>
 
               {items.filter(item => item.name.toLowerCase().match(search.toLowerCase())).length >

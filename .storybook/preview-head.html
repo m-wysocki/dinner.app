@@ -1,6 +1,6 @@
 
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Baloo+2:400,500&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,900&display=swap');
     *, *::before, *::after {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -11,14 +11,27 @@
     }
     body {
         font-size: 16px;
-        font-family: 'Baloo 2', cursive;
-        margin: 50px;
+        font-family: 'Montserrat', sans-serif;
+        margin: 0 0 10rem 0;
         padding: 0;
+        color: #000000;
+        line-height: 1.5;
+        padding: 150px;
     }
     a{
         text-decoration: none;
     }
     img{
         max-width: 100%;
+    }
+    .isModalOpen::after {
+        content: '';
+        background-color: rgba(0, 0, 0, 0.7);
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 </style>

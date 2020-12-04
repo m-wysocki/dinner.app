@@ -18,7 +18,7 @@ export const AddItemOption = styled.div`
   padding: 10px 15px;
   transition: background-color 0.3s ease-in-out;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.main};
+    background-color: ${({ theme }) => theme.colors.green};
   }
 `;
 export const ItemsList = styled.div`

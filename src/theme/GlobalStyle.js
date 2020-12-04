@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Baloo+2:400,500&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,900&display=swap');
   *, *::before, *::after {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -12,9 +12,11 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
       font-size: 16px;
-      font-family: 'Baloo 2', cursive;
-      margin: 50px;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0 0 10rem 0;
       padding: 0;
+      color: #000000;
+      line-height: 1.5;
   }
   a{
     text-decoration: none;

@@ -2,10 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useFormikContext } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems } from '../../../actions';
-import BreakLine from '../../atoms/BreakLine/BreakLine';
 import Modal from '../Modal/Modal';
 import useModal from '../../../hooks/useModal';
 import AddIngredientsForm from '../AddIngredientsForm/AddIngredientsForm';
+import Heading from '../../atoms/Heading/Heading';
+import Button from '../../atoms/Button/Button';
+import Select from '../../atoms/Select/Select';
+import Input from '../../atoms/Input/Input';
+import * as S from './RecipeChooseIngredientsStyles';
 
 const RecipeChooseIngredients = () => {
   const ingredientItems = 'ingredients';
@@ -16,7 +20,7 @@ const RecipeChooseIngredients = () => {
   const units = useSelector(state => state[unitItems]);
   const unitTextElement = useRef(null);
   const [ingredient, setIngredient] = useState({
-    id: 'wybierz składnik',
+    id: '',
     name: '',
     amount: '',
     unit: '',
@@ -58,54 +62,54 @@ const RecipeChooseIngredients = () => {
 
   return (
     <div>
-      <h3>Dodaj składniki</h3>
-      <select name="id" value={ingredient.id} onChange={handleFormChange}>
-        <option disabled="disabled">wybierz składnik</option>
-        {items &&
-          items.map(({ id, name }) => (
-            <option key={id} value={id}>
-              {name}
-            </option>
-          ))}
-      </select>
-      <input
-        type="text"
-        name="amount"
-        value={ingredient.amount}
-        placeholder="ilość"
-        onChange={handleFormChange}
-      />
-      <span ref={unitTextElement}>{ingredient.unit}</span>
-      <button type="button" onClick={handleAddIngredient}>
-        dodaj
-      </button>
+      <Heading small>Add ingredients</Heading>
+      <S.Content>
+        <S.AddIngredient>
+          <Select
+            name="id"
+            value={ingredient.id}
+            label="Select ingredient"
+            firstOption=""
+            onChangeFn={handleFormChange}
+            items={items && [{ id: '', name: '', isDisabled: true }, ...items]}
+          />
+          <S.StyledInput
+            as={Input}
+            type="text"
+            name="amount"
+            value={ingredient.amount}
+            label="amount"
+            onChange={handleFormChange}
+          />
+          <S.Unit ref={unitTextElement}>{ingredient.unit}</S.Unit>
+          <Button secondary small type="button" onClick={handleAddIngredient}>
+            add
+          </Button>
+        </S.AddIngredient>
 
-      <div>
-        <p>
-          Jeżeli na liście nie ma potrzebnego składnika -
-          <button type="button" onClick={toggleModal}>
-            dodaj składnik
-          </button>
+        <S.MissingIngredient>
+          <p>The ingredient you need isn't on the list?</p>
+          <Button small secondary type="button" onClick={toggleModal}>
+            add ingredient
+          </Button>
           <Modal isModalOpen={isModalOpen} toggleModal={toggleModal}>
             <AddIngredientsForm />
           </Modal>
-        </p>
-      </div>
+        </S.MissingIngredient>
+      </S.Content>
 
-      <div>
-        <h4>Składniki:</h4>
-        <ul>
-          {values.ingredients &&
-            values.ingredients.length > 0 &&
-            values.ingredients.map(item => (
+      {values.ingredients && values.ingredients.length > 0 && (
+        <S.IngredientList>
+          <Heading small>Ingredients</Heading>
+          <ul>
+            {values.ingredients.map(item => (
               <li key={item.id}>
                 {item.name} {item.amount} {item.unit}
               </li>
             ))}
-        </ul>
-      </div>
-
-      <BreakLine />
+          </ul>
+        </S.IngredientList>
+      )}
     </div>
   );
 };

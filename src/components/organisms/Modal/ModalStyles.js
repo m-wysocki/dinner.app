@@ -25,6 +25,7 @@ export const CloseButton = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
   :hover {
     background-color: #e42323;
   }

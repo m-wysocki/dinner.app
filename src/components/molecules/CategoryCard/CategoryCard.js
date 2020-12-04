@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { StyledCategory, Title } from './CategoryCardStyles';
 
 const CategoryCard = ({ id, name, slug }) => (
-  <StyledCategory as={Link} to={`/kategorie/${id}/${slug}`}>
+  <StyledCategory as={Link} to={`/categories/${id}/${slug}`}>
     <Title>{name}</Title>
   </StyledCategory>
 );

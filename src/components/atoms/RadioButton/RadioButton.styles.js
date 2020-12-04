@@ -8,7 +8,7 @@ export const Inner = styled.span`
   transform: scale(0);
   transform-origin: center center;
   border-radius: 100%;
-  background-color: ${({ theme }) => theme.colors.main};
+  background-color: ${({ theme }) => theme.colors.green};
   opacity: 0;
 `;
 export const Outer = styled.span`
@@ -55,9 +55,9 @@ export const Input = styled.input`
     -ms-transform: scale(1);
     transform: scale(1);
     opacity: 1;
-    background-color: ${({ theme }) => theme.colors.main};
+    background-color: ${({ theme }) => theme.colors.green};
   }
   &:checked + ${Outer} {
-    border: 2px solid ${({ theme }) => theme.colors.main};
+    border: 2px solid ${({ theme }) => theme.colors.green};
   }
 `;

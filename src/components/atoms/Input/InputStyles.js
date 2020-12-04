@@ -66,7 +66,7 @@ export const StyledInput = styled.input`
     top: -15px;
     font-size: 12px;
     color: #039be5;
-    font-weight: ${({ theme }) => theme.bold};
+    font-weight: ${({ theme }) => theme.medium};
   }
   &:focus ~ ${InputBar}, &:not(:placeholder-shown) ~ ${InputBar} {
     &:before,

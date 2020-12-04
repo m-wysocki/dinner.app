@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Loader from '../../components/atoms/Loader/Loader';
 import useFechItemsByParam from '../../hooks/useFechItemsByParam';
 import RecipesList from '../../components/organisms/RecipesList/RecipesList';
+import Heading from '../../components/atoms/Heading/Heading';
+import SubpageTemplate from '../../templates/SubpageTemplate';
 
 const SingleCategoryView = ({ match }) => {
   const { params } = match;
@@ -11,10 +13,10 @@ const SingleCategoryView = ({ match }) => {
 
   if (!category) return <Loader />;
   return (
-    <div>
-      <h1>Przepisy z kategorii: {category.name}</h1>
+    <SubpageTemplate>
+      <Heading thin>{category.name}</Heading>
       <RecipesList recipes={recipes} />
-    </div>
+    </SubpageTemplate>
   );
 };
 

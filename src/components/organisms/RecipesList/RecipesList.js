@@ -6,17 +6,14 @@ import RecipeCard from '../../molecules/RecipeCard/RecipeCard';
 const List = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 30px;
+  grid-column-gap: 3rem;
+  grid-row-gap: 9rem;
+  align-items: stretch;
 `;
 
 const RecipesList = ({ recipes }) => {
   return (
-    <List>
-      {recipes &&
-        recipes.map(({ id, slug, name, image }) => (
-          <RecipeCard key={id} id={id} slug={slug} img={image} name={name} />
-        ))}
-    </List>
+    <List>{recipes && recipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}</List>
   );
 };
 
