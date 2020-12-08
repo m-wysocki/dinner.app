@@ -7,10 +7,10 @@ import useModal from '../../../hooks/useModal';
 import AddIngredientsForm from '../AddIngredientsForm/AddIngredientsForm';
 import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
-import Select from '../../atoms/Select/Select';
 import Input from '../../atoms/Input/Input';
 import * as S from './RecipeChooseIngredientsStyles';
 import InputError from '../../atoms/InputError/InputError';
+import InputLiveSearch from '../../atoms/InputLiveSearch/InputLiveSearch';
 
 const RecipeChooseIngredients = () => {
   const ingredientItems = 'ingredients';
@@ -19,36 +19,46 @@ const RecipeChooseIngredients = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state[ingredientItems]);
   const units = useSelector(state => state[unitItems]);
-  const unitTextElement = useRef(null);
-  const [ingredient, setIngredient] = useState({
+  const unitTextRef = useRef(null);
+  const initialIngredient = {
     id: '',
     name: '',
     amount: '',
     unit: '',
-  });
+  };
+
+  const [ingredient, setIngredient] = useState(initialIngredient);
 
   const [isFormValid, setIsFormValid] = useState(true);
   const [ingredients, setIngredients] = useState(values.ingredients);
 
-  const handleFormChange = event => {
-    const { target } = event;
-    const { name, value } = target;
-
-    if (name === 'id') {
-      const selectedIngredient = items.filter(item => item.id === value)[0];
+  const handleSetIngredient = ingredientId => {
+    if (ingredientId) {
+      const selectedIngredient = items.filter(item => item.id === ingredientId)[0];
       const unit = units.filter(item => item.id === selectedIngredient.unitId)[0];
       setIngredient(prevState => ({
         ...prevState,
-        [name]: value,
+        id: ingredientId,
         name: selectedIngredient.name,
         unit: unit.name,
       }));
     } else {
       setIngredient(prevState => ({
         ...prevState,
-        [name]: value,
+        id: '',
+        name: '',
+        unit: '',
       }));
     }
+  };
+
+  const handleAmountChange = event => {
+    const { target } = event;
+    const { value } = target;
+    setIngredient(prevState => ({
+      ...prevState,
+      amount: value,
+    }));
   };
 
   const handleAddIngredient = e => {
@@ -56,6 +66,7 @@ const RecipeChooseIngredients = () => {
     if (ingredient.id && ingredient.amount) {
       setIsFormValid(true);
       setIngredients(prevState => [...prevState, ingredient]);
+      setIngredient(initialIngredient);
     } else {
       setIsFormValid(false);
     }
@@ -65,7 +76,7 @@ const RecipeChooseIngredients = () => {
     dispatch(fetchItems(ingredientItems));
     dispatch(fetchItems(unitItems));
     values.ingredients = ingredients;
-  }, [dispatch, ingredientItems, unitItems, ingredients, values]);
+  }, [dispatch, ingredientItems, unitItems, ingredients, values, ingredient]);
 
   const { isModalOpen, toggleModal } = useModal();
 
@@ -76,13 +87,13 @@ const RecipeChooseIngredients = () => {
       <S.Content>
         <S.AddIngredient>
           <S.IngredientWrapper>
-            <Select
+            <InputLiveSearch
+              label="Search ingredient*"
+              searchItems="ingredients"
               name="id"
-              value={ingredient.id}
-              label="Select ingredient*"
-              firstOption=""
-              onChangeFn={handleFormChange}
-              items={items && [{ id: '', name: '', isDisabled: true }, ...items]}
+              initialSearch={ingredient.name}
+              setIngredientFn={handleSetIngredient}
+              inline
             />
             {!isFormValid && !ingredient.id && (
               <InputError absolute>This field is required</InputError>
@@ -96,7 +107,7 @@ const RecipeChooseIngredients = () => {
               name="amount"
               value={ingredient.amount}
               label="amount*"
-              onChange={handleFormChange}
+              onChange={handleAmountChange}
             />
 
             {!isFormValid && !ingredient.amount && (
@@ -104,7 +115,7 @@ const RecipeChooseIngredients = () => {
             )}
           </S.IngredientWrapper>
 
-          <S.Unit ref={unitTextElement}>{ingredient.unit}</S.Unit>
+          <S.Unit ref={unitTextRef}>{ingredient.unit}</S.Unit>
 
           <Button secondary small type="button" onClick={handleAddIngredient}>
             add

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import slugify from 'react-slugify';
 import { array, object, string } from 'yup';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import FormikWizard from '../FormikWizard/FormikWizard';
 import FormikWizardStep from '../FormikWizardStep/FormikWizardStep';
@@ -20,7 +20,6 @@ const AddRecipeMultiStepForm = () => {
 
   return (
     <>
-      <ToastContainer />
       <FormikWizard
         initialValues={{
           name: '',
@@ -38,15 +37,7 @@ const AddRecipeMultiStepForm = () => {
           // eslint-disable-next-line no-param-reassign
           values.slug = slugify(values.name);
           addRecipe(itemsType, values);
-          toast.success('👌 The recipe was added successfully', {
-            position: 'top-center',
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success('👌 The recipe was added successfully');
           setTimeout(() => {
             history.push('/recipes');
           }, 2000);

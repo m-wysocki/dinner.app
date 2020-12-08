@@ -28,6 +28,7 @@ const RecipeSource = () => {
         <SourceLabel>Source:</SourceLabel>
         <Field component={RadioButton} name="sourceType" id="link" label="link" />
         <Field component={RadioButton} name="sourceType" id="book" label="book" />
+        <Field component={RadioButton} name="sourceType" id="own" label="own recipe" />
       </SourceType>
       {values.sourceType === 'link' && (
         <Field name="link">
@@ -36,7 +37,13 @@ const RecipeSource = () => {
       )}
       {values.sourceType === 'book' && (
         <>
-          <InputLiveSearch id="bookId" name="bookId" searchItems="books" label="Search book" />
+          <InputLiveSearch
+            withAdding
+            id="bookId"
+            name="bookId"
+            searchItems="books"
+            label="Search book"
+          />
           <Field name="bookSite">
             {({ field }) => (
               <Input id="bookSite" name="bookSite" label="Recipe page in the book" {...field} />

@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 
 export const SearcherWrapper = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: ${({ inline }) => (inline ? '0' : '4rem')};
+  position: relative;
 `;
 export const SearchInput = styled.div`
   margin-bottom: 0;
-  //background-color: red;
 `;
 export const SearchResultWrapper = styled.div`
   background-color: #f6f9fc;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 9;
 `;
 export const AddItemName = styled.span`
   font-weight: ${({ theme }) => theme.bold};

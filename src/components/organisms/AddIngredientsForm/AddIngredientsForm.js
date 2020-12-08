@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { object, string } from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { toast } from 'react-toastify';
@@ -37,18 +38,10 @@ const AddIngredientsForm = ({ toggleModal }) => {
         }}
         onSubmit={values => {
           addIngredients(itemsType, values);
-          toast.success('👌 The ingredient was added successfully', {
-            position: 'top-center',
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success('👌 The ingredient was added successfully');
           setTimeout(() => {
             toggleModal();
-          }, 1500);
+          }, 1000);
         }}
       >
         {() => (
@@ -58,6 +51,7 @@ const AddIngredientsForm = ({ toggleModal }) => {
             </Field>
             <ErrorMessage name="name" component={InputError} />
             <InputLiveSearch
+              withAdding
               id="unitId"
               name="unitId"
               searchItems="units"
@@ -65,6 +59,7 @@ const AddIngredientsForm = ({ toggleModal }) => {
             />
             <ErrorMessage name="unitId" component={InputError} />
             <InputLiveSearch
+              withAdding
               id="shopCategoryId"
               name="shopCategoryId"
               searchItems="shopCategories"
@@ -82,3 +77,7 @@ const AddIngredientsForm = ({ toggleModal }) => {
 };
 
 export default AddIngredientsForm;
+
+AddIngredientsForm.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
+};

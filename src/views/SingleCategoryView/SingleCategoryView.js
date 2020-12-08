@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from '../../components/atoms/Loader/Loader';
-import useFechItemsByParam from '../../hooks/useFechItemsByParam';
+import useFetchItemsByParam from '../../hooks/useFetchItemsByParam';
 import RecipesList from '../../components/organisms/RecipesList/RecipesList';
 import Heading from '../../components/atoms/Heading/Heading';
 import SubpageTemplate from '../../templates/SubpageTemplate';
 
 const SingleCategoryView = ({ match }) => {
   const { params } = match;
-  const category = useFechItemsByParam('categories', 'id', params.id)[0];
-  const recipes = useFechItemsByParam('recipes', 'categoryId', params.id);
+  const category = useFetchItemsByParam('categories', 'id', params.id)[0];
+  const recipes = useFetchItemsByParam('recipes', 'categoryId', params.id);
 
   if (!category) return <Loader />;
   return (

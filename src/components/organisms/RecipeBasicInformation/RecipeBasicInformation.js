@@ -28,6 +28,7 @@ const RecipeBasicInformation = () => {
       </Field>
 
       <InputLiveSearch
+        withAdding
         id="categoryId"
         name="categoryId"
         searchItems="categories"

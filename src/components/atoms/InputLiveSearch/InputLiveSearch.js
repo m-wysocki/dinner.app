@@ -8,9 +8,9 @@ import Input from '../Input/Input';
 import BreakLine from '../BreakLine/BreakLine';
 import * as S from './InputLiveSearchStyles';
 import useFetchItems from '../../../hooks/useFetchItems';
-import useFechItemsByParam from '../../../hooks/useFechItemsByParam';
+import useFetchItemsByParam from '../../../hooks/useFetchItemsByParam';
 
-const InputLiveSearch = ({ searchItems, label, name }) => {
+const InputLiveSearch = ({ searchItems, label, name, withAdding, setIngredientFn, inline }) => {
   const { values } = useFormikContext();
   const [search, setSearch] = useState('');
   const [autocomplete, setAutocomplete] = useState(false);
@@ -21,7 +21,7 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
 
   const addCategory = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
 
-  const activeItem = useFechItemsByParam(searchItems, 'id', values[name])[0];
+  const activeItem = useFetchItemsByParam(searchItems, 'id', values[name])[0];
 
   const handleInputChange = e => {
     values[name] = '';
@@ -35,8 +35,6 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
   const handleAddCategory = () => {
     addCategory(searchItems, { name: search, slug: slugify(search) }).then(id => {
       values[name] = id;
-      inputEl.current.value = search;
-      setSearch('');
       setAutocomplete(false);
     });
   };
@@ -44,21 +42,23 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
   const handleResultClick = (id, itemName, e) => {
     e.preventDefault();
     values[name] = id;
-    inputEl.current.value = itemName;
-    setSearch('');
+    setSearch(itemName);
     setAutocomplete(false);
+    setIngredientFn(id);
   };
 
   const handleClickOutside = event => {
     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
       setAutocomplete(false);
+      setIngredientFn();
     }
   };
 
   useEffect(() => {
     if (activeItem) {
-      inputEl.current.value = activeItem.name;
+      setSearch(activeItem.name);
     }
+
     if (autocomplete) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
@@ -70,19 +70,20 @@ const InputLiveSearch = ({ searchItems, label, name }) => {
   }, [activeItem, searchItems, wrapperRef, autocomplete]);
 
   return (
-    <S.SearcherWrapper ref={wrapperRef}>
+    <S.SearcherWrapper inline={inline} ref={wrapperRef}>
       <S.SearchInput
         as={Input}
         name={`${searchItems}-name`}
         type="text"
+        value={search}
         ref={inputEl}
         label={label}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
       />
-      {(autocomplete || search) && (
+      {(autocomplete || search) && !activeItem && (
         <S.SearchResultWrapper>
-          {search && search.length > 0 && !items.find(c => c.name === search) && (
+          {search && search.length > 0 && !items.find(c => c.name === search) && withAdding && (
             <>
               <S.AddItemOption onClick={handleAddCategory}>
                 Add: <S.AddItemName>{search}</S.AddItemName>
@@ -113,4 +114,13 @@ InputLiveSearch.propTypes = {
   label: PropTypes.string.isRequired,
   searchItems: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  withAdding: PropTypes.bool,
+  setIngredientFn: PropTypes.func,
+  inline: PropTypes.bool,
+};
+
+InputLiveSearch.defaultProps = {
+  withAdding: false,
+  setIngredientFn: () => null,
+  inline: false,
 };

@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { BiTimeFive, BiHash, BiBookBookmark } from 'react-icons/bi';
 import PropTypes from 'prop-types';
+import { BiTimeFive, BiHash, BiBookBookmark } from 'react-icons/bi';
+import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import Heading from '../../atoms/Heading/Heading';
 import { removeItem } from '../../../actions';
 import * as S from './RecipeCardStyles';
-import useFechItemsByParam from '../../../hooks/useFechItemsByParam';
+import useFetchItemsByParam from '../../../hooks/useFetchItemsByParam';
 import emptyPlateImage from '../../../assets/images/empty-plate.jpg';
+import ShoppingListContext from '../../../context/ShoppingListContext';
+import Button from '../../atoms/Button/Button';
 
 const RecipeCard = ({ recipe, removeRecipe }) => {
-  const { id, slug, name, image, preparationTime, categoryId, bookId } = recipe;
-  const book = useFechItemsByParam('books', 'id', bookId)[0];
-  const category = useFechItemsByParam('categories', 'id', categoryId)[0];
+  const { id, slug, name, image, preparationTime, categoryId, bookId, sourceType } = recipe;
+  const book = useFetchItemsByParam('books', 'id', bookId)[0];
+  const category = useFetchItemsByParam('categories', 'id', categoryId)[0];
   const bookName = book ? book.name : null;
   const categoryName = category ? category.name : null;
+  const [shoppingList, setShoppingList] = useContext(ShoppingListContext);
+  const handleAddToList = () => {
+    if (!shoppingList.includes(id)) {
+      setShoppingList([...shoppingList, id]);
+      toast.success('👌 Ingredients were added to your shopping list');
+    } else {
+      toast.error("👎 You can't add the same recipe twice");
+    }
+  };
   return (
     <S.StyledRecipe>
       <S.Image>
@@ -35,7 +47,7 @@ const RecipeCard = ({ recipe, removeRecipe }) => {
               {categoryName}
             </S.InfoItem>
           )}
-          {bookName && (
+          {sourceType === 'book' && (
             <S.InfoItem>
               <BiBookBookmark />
               {bookName}
@@ -43,12 +55,17 @@ const RecipeCard = ({ recipe, removeRecipe }) => {
           )}
         </S.Info>
       </S.Content>
-      <S.Footer as={Link} to={`/recipes/${id}/${slug}`}>
-        more
+      <S.Footer>
+        <Button small secondary onClick={handleAddToList}>
+          add to list
+        </Button>
+        <Button small secondary onClick={() => removeRecipe('recipes', id)}>
+          x
+        </Button>
+        <Link to={`/recipes/${id}/${slug}`}>
+          <Button small>more</Button>
+        </Link>
       </S.Footer>
-      {/*<button type="button" onClick={() => removeRecipe('recipes', id)}>*/}
-      {/*  usuń*/}
-      {/*</button>*/}
     </S.StyledRecipe>
   );
 };
@@ -68,6 +85,7 @@ RecipeCard.propTypes = {
     preparationTime: PropTypes.string,
     categoryId: PropTypes.string.isRequired,
     bookId: PropTypes.string,
+    sourceType: PropTypes.string.isRequired,
   }).isRequired,
   removeRecipe: PropTypes.func.isRequired,
 };

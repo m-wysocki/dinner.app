@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from '../../components/atoms/Loader/Loader';
-import useFechItemsByParam from '../../hooks/useFechItemsByParam';
+import useFetchItemsByParam from '../../hooks/useFetchItemsByParam';
 import Heading from '../../components/atoms/Heading/Heading';
 import SubpageTemplate from '../../templates/SubpageTemplate';
 import * as S from './SingleRecipeViewStyles';
@@ -10,13 +10,13 @@ import emptyPlateImage from '../../assets/images/empty-plate.jpg';
 
 const SingleRecipeView = ({ match }) => {
   const { params } = match;
-  const recipe = useFechItemsByParam('recipes', 'id', params.id)[0];
+  const recipe = useFetchItemsByParam('recipes', 'id', params.id)[0];
 
   const bookId = recipe ? recipe.bookId : null;
   const categoryId = recipe ? recipe.categoryId : null;
 
-  const book = useFechItemsByParam('books', 'id', bookId)[0];
-  const category = useFechItemsByParam('categories', 'id', categoryId)[0];
+  const book = useFetchItemsByParam('books', 'id', bookId)[0];
+  const category = useFetchItemsByParam('categories', 'id', categoryId)[0];
 
   const bookName = book ? book.name : null;
   const categoryName = category ? category.name : null;
@@ -47,14 +47,14 @@ const SingleRecipeView = ({ match }) => {
                       </p>
                     </li>
                   )}
-                  {recipe.bookId && (
+                  {recipe.sourceType === 'book' && (
                     <li>
                       <p>
                         <b>book: </b> <i>{bookName}</i> - page {recipe.bookSite}
                       </p>
                     </li>
                   )}
-                  {recipe.link && (
+                  {recipe.sourceType === 'link' && (
                     <li>
                       <p>
                         <b>link: </b>

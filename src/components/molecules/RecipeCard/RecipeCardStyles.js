@@ -5,16 +5,14 @@ export const Footer = styled.div`
   height: 3rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 1.6rem;
   font-weight: ${({ theme }) => theme.bold};
   color: #fff;
-  background-color: #000;
   margin-top: auto;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
   transition: background-color 0.3s ease-in-out;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.extra};
-  }
 `;
 
 export const Image = styled.div`
