@@ -19,7 +19,7 @@ export const AddItemName = styled.span`
 `;
 export const AddItemOption = styled.div`
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 1rem 1.5rem;
   transition: background-color 0.3s ease-in-out;
   &:hover {
     background-color: ${({ theme }) => theme.colors.green};
@@ -31,7 +31,7 @@ export const ItemsList = styled.div`
 `;
 export const Item = styled.span`
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 1rem 1.5rem;
   transition: background-color 0.2s ease-in-out;
   &:hover {
     background-color: #ccc;

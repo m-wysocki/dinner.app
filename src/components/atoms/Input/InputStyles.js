@@ -6,10 +6,10 @@ export const InputWrapper = styled.div`
 `;
 export const InputLabel = styled.label`
   color: #999;
-  font-size: 16px;
+  font-size: 1.6rem;
   position: absolute;
   pointer-events: none;
-  top: 10px;
+  top: 1rem;
   transition: 0.2s ease all;
   width: 100%;
 `;
@@ -39,7 +39,7 @@ export const InputBar = styled.span`
     display: block;
     content: '';
     position: absolute;
-    top: 65px;
+    top: 6.5rem;
     opacity: 0;
     transition: 0.2s opacity ease-out, 0.2s color ease-out;
     -moz-transition: 0.2s opacity ease-out, 0.2s color ease-out;
@@ -49,8 +49,8 @@ export const InputBar = styled.span`
 
 export const StyledInput = styled.input`
   color: #333;
-  font-size: 16px;
-  padding: 10px 10px 10px 0;
+  font-size: 1.6rem;
+  padding: 1rem 1rem 1rem 0;
   position: relative;
   display: block;
   border: none;
@@ -63,8 +63,8 @@ export const StyledInput = styled.input`
   }
 
   &:focus + ${InputLabel}, &:not(:placeholder-shown) ~ ${InputLabel} {
-    top: -15px;
-    font-size: 12px;
+    top: -1.5rem;
+    font-size: 1.2rem;
     color: #039be5;
     font-weight: ${({ theme }) => theme.medium};
   }

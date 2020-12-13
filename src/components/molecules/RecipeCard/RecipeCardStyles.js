@@ -16,7 +16,7 @@ export const Footer = styled.div`
 `;
 
 export const Image = styled.div`
-  height: 200px;
+  height: 20rem;
   display: flex;
   align-items: center;
   justify-content: center;

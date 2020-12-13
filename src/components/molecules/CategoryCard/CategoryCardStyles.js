@@ -5,13 +5,12 @@ export const StyledCategory = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 125px;
+  height: 12.5rem;
   color: ${theme.colors.text};
   border-radius: 1rem;
   transition: background-color 0.3s ease-in-out;
   overflow: hidden;
-  padding: 15px;
+  padding: 1.5rem;
   &:nth-of-type(5n + 1) {
     background: ${theme.colors.yellow};
   }

@@ -10,15 +10,15 @@ export const Wrapper = styled.div`
   width: 50%;
   margin: 0 auto;
   height: auto;
-  padding: 30px 50px;
+  padding: 3rem 5rem;
   display: flex;
   flex-direction: column;
 `;
 export const CloseButton = styled.a`
   align-self: flex-end;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 3rem;
+  height: 3rem;
   background-color: #af2626;
   border-radius: 100%;
   box-shadow: 0.5px 3px 4px 1px rgba(0, 0, 0, 0.1);

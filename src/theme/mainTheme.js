@@ -17,5 +17,5 @@ export const theme = {
   regular: 400,
   medium: 500,
   bold: 600,
-  padding: '8vw',
+  padding: '10rem',
 };

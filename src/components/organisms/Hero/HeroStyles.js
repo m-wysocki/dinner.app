@@ -6,7 +6,7 @@ export const StyledHero = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px;
+  padding: 5rem;
 `;
 export const Content = styled.div`
   max-width: 40%;

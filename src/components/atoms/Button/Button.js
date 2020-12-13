@@ -25,12 +25,12 @@ const Button = styled.button`
   ${({ secondary }) =>
     secondary &&
     css`
-      border: solid 2px ${({ theme }) => theme.colors.grey};
+      border: solid 0.2rem ${({ theme }) => theme.colors.grey};
       background-color: #fff;
       color: ${({ theme }) => theme.colors.text};
       transition: border 0.3s ease-in-out;
       &:hover {
-        border: solid 2px ${({ theme }) => theme.colors.text};
+        border: solid 0.2rem ${({ theme }) => theme.colors.text};
         background-color: #fff;
       }
     `}
@@ -45,14 +45,14 @@ const Button = styled.button`
     css`
       color: ${({ theme }) => theme.colors.extra};
       &:hover {
-        border: solid 2px ${({ theme }) => theme.colors.extra};
+        border: solid 0.2rem ${({ theme }) => theme.colors.extra};
       }
     `}
     ${({ add }) =>
       add &&
       css`
         &:hover {
-          border: solid 2px ${({ theme }) => theme.colors.green};
+          border: solid 0.2rem ${({ theme }) => theme.colors.green};
         }
       `}
 `;

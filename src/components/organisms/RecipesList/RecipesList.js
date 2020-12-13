@@ -6,9 +6,14 @@ import RecipeCard from '../../molecules/RecipeCard/RecipeCard';
 const List = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 3rem;
-  grid-row-gap: 9rem;
+  grid-gap: 3rem;
   align-items: stretch;
+  @media (max-width: 1499px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 1199px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const RecipesList = ({ recipes }) => {

@@ -9,10 +9,16 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   html {
-        font-size: 62.5%;
+    font-size: 0.525vw;
+    @media (max-width: 1499px) {
+      font-size: 0.625vw;
+    }
+    @media (max-width: 1199px) {
+      font-size: 0.725vw;
+    }
   }
   body {
-      font-size: 16px;
+      font-size: 1.6rem;
       font-family: 'Montserrat', sans-serif;
       margin: 0 0 10rem 0;
       padding: 0;

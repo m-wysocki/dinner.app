@@ -10,11 +10,11 @@ const SourceType = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: -20px;
-  margin-bottom: 20px;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
 `;
 const SourceLabel = styled.p`
-  margin-right: 10px;
+  margin-right: 1rem;
 `;
 
 const RecipeSource = () => {

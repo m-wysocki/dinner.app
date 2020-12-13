@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Inner = styled.span`
   -webkit-transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  height: 8px;
-  width: 8px;
+  height: 0.8rem;
+  width: 0.8rem;
   transform: scale(0);
   transform-origin: center center;
   border-radius: 100%;
@@ -12,13 +12,13 @@ export const Inner = styled.span`
   opacity: 0;
 `;
 export const Outer = styled.span`
-  height: 18px;
-  width: 18px;
+  height: 1.8rem;
+  width: 1.8rem;
   border: 2px solid #039be5;
   border-radius: 50%;
   background-color: #fff;
   position: relative;
-  margin-right: 5px;
+  margin-right: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,7 @@ export const Label = styled.label`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-right: 10px;
+  padding-right: 1rem;
   font-size: 1.4rem;
   cursor: pointer;
   line-height: 1;

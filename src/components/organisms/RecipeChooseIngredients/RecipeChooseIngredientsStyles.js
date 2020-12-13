@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-gap: 3rem;
   margin-bottom: 8rem;
 `;
 
@@ -27,7 +28,7 @@ export const StyledInput = styled.input`
 export const Unit = styled.div`
   margin-left: 2rem;
   margin-right: 2rem;
-  min-width: 25px;
+  min-width: 2.5rem;
 `;
 
 export const MissingIngredient = styled.div`
