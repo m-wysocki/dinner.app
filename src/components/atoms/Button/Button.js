@@ -40,6 +40,21 @@ const Button = styled.button`
       font-size: 1.3rem;
       padding: 1rem 2rem;
     `}
+  ${({ remove }) =>
+    remove &&
+    css`
+      color: ${({ theme }) => theme.colors.extra};
+      &:hover {
+        border: solid 2px ${({ theme }) => theme.colors.extra};
+      }
+    `}
+    ${({ add }) =>
+      add &&
+      css`
+        &:hover {
+          border: solid 2px ${({ theme }) => theme.colors.green};
+        }
+      `}
 `;
 
 export default Button;

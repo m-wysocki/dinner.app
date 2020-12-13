@@ -1,8 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
+import styled from 'styled-components';
 import Heading from '../../components/atoms/Heading/Heading';
 import SubpageTemplate from '../../templates/SubpageTemplate';
 import ShoppingListContext from '../../context/ShoppingListContext';
 import useFetchItems from '../../hooks/useFetchItems';
+import RecipesList from '../../components/organisms/RecipesList/RecipesList';
+
+const IngredientsWrapper = styled.div`
+  margin-top: 10rem;
+`;
+
+const Ingredients = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5rem;
+`;
 
 const ShoppingListView = () => {
   const [shoppingList] = useContext(ShoppingListContext);
@@ -13,9 +25,10 @@ const ShoppingListView = () => {
   let ingredientListReduced = [];
   let finalIngredientList = [];
 
+  const filteredRecipes = recipes && recipes.filter(recipe => shoppingList.includes(recipe.id));
+
   if (shoppingList && shoppingList.length > 0 && recipes && ingredients && shopCategories) {
-    const fiteredRecipes = recipes.filter(recipe => shoppingList.includes(recipe.id));
-    fiteredRecipes.forEach(recipe => {
+    filteredRecipes.forEach(recipe => {
       ingredientList.push(...recipe.ingredients);
     });
 
@@ -46,33 +59,36 @@ const ShoppingListView = () => {
   return (
     <SubpageTemplate>
       <Heading thin>your shopping list</Heading>
-      {/*<p>Recipes list</p>*/}
-      {/*<ul>*/}
-      {/*  {shoppingList.map(item => (*/}
-      {/*    <li key={item}>{item}</li>*/}
-      {/*  ))}*/}
-      {/*</ul>*/}
-      {finalIngredientList && finalIngredientList.length > 0 && (
+      {filteredRecipes && (
         <>
+          <Heading small>Recipes list</Heading>
+          <RecipesList recipes={filteredRecipes} />
+        </>
+      )}
+      {finalIngredientList && finalIngredientList.length > 0 && (
+        <IngredientsWrapper>
           <Heading small>Ingredient list</Heading>
 
-          {finalIngredientList.map(shopCategory => (
-            <>
-              {shopCategory[1] && shopCategory[1].length > 0 && (
-                <>
-                  <h3>{shopCategory[0]}</h3>
-                  <ul>
-                    {shopCategory[1].map(ingredient => (
-                      <li key={ingredient.id}>
-                        {ingredient.name} {ingredient.amount} {ingredient.unit}
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </>
-          ))}
-        </>
+          <Ingredients>
+            {finalIngredientList.map(shopCategory => {
+              if (shopCategory[1] && shopCategory[1].length > 0) {
+                return (
+                  <div>
+                    <h3>{shopCategory[0]}</h3>
+                    <ul>
+                      {shopCategory[1].map(ingredient => (
+                        <li key={ingredient.id}>
+                          {ingredient.name} {ingredient.amount} {ingredient.unit}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </Ingredients>
+        </IngredientsWrapper>
       )}
     </SubpageTemplate>
   );

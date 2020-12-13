@@ -24,7 +24,8 @@ const RecipeCard = ({ recipe, removeRecipe }) => {
       setShoppingList([...shoppingList, id]);
       toast.success('👌 Ingredients were added to your shopping list');
     } else {
-      toast.error("👎 You can't add the same recipe twice");
+      setShoppingList(shoppingList.filter(recipeId => recipeId !== id));
+      toast.error('🤷‍♂️Ingredients were removed from your shopping list');
     }
   };
   return (
@@ -56,8 +57,14 @@ const RecipeCard = ({ recipe, removeRecipe }) => {
         </S.Info>
       </S.Content>
       <S.Footer>
-        <Button small secondary onClick={handleAddToList}>
-          add to list
+        <Button
+          small
+          secondary
+          remove={shoppingList.includes(id)}
+          add={!shoppingList.includes(id)}
+          onClick={handleAddToList}
+        >
+          {shoppingList.includes(id) ? '📔 remove' : '📔 add'}
         </Button>
         <Button small secondary onClick={() => removeRecipe('recipes', id)}>
           x
