@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { StyledHeader, MenuItem } from './HeaderStyles';
 import Logo from '../../atoms/Logo/Logo';
 import ShoppingListContext from '../../../context/ShoppingListContext';
+import Button from '../../atoms/Button/Button';
+import Badge from '../../atoms/Badge/Badge';
 
 const Header = ({ subpage }) => {
   const [shoppingList] = useContext(ShoppingListContext);
@@ -22,9 +24,9 @@ const Header = ({ subpage }) => {
         <MenuItem as={Link} to="/add-recipe">
           add recipe
         </MenuItem>
-        <MenuItem as={Link} to="/shopping-list">
-          shopping list {shoppingList.length > 0 && `(${shoppingList.length})`}
-        </MenuItem>
+        <Button as={Link} small="true" to="/shopping-list">
+          shopping list {shoppingList.length > 0 && <Badge number={shoppingList.length} />}
+        </Button>
       </div>
     </StyledHeader>
   );

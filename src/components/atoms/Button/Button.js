@@ -43,7 +43,7 @@ const Button = styled.button`
   ${({ remove }) =>
     remove &&
     css`
-      color: ${({ theme }) => theme.colors.extra};
+      //color: ${({ theme }) => theme.colors.extra};
       &:hover {
         border: solid 0.2rem ${({ theme }) => theme.colors.extra};
       }
