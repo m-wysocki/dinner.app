@@ -73,7 +73,7 @@ const ShoppingListView = () => {
             {finalIngredientList.map(shopCategory => {
               if (shopCategory[1] && shopCategory[1].length > 0) {
                 return (
-                  <div>
+                  <div key={shopCategory[0]}>
                     <h3>{shopCategory[0]}</h3>
                     <ul>
                       {shopCategory[1].map(ingredient => (

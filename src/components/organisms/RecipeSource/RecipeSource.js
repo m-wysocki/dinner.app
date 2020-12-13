@@ -38,7 +38,8 @@ const RecipeSource = () => {
       {values.sourceType === 'book' && (
         <>
           <InputLiveSearch
-            withAdding
+            withAddingNewItem
+            withAddingToFormikContext
             id="bookId"
             name="bookId"
             searchItems="books"

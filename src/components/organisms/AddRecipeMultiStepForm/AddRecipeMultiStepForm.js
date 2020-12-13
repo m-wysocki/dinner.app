@@ -40,7 +40,7 @@ const AddRecipeMultiStepForm = () => {
           toast.success('👌 The recipe was added successfully');
           setTimeout(() => {
             history.push('/recipes');
-          }, 2000);
+          }, 1500);
         }}
       >
         <FormikWizardStep

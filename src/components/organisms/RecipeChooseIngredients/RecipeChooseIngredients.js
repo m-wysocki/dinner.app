@@ -90,7 +90,7 @@ const RecipeChooseIngredients = () => {
             <InputLiveSearch
               label="Search ingredient*"
               searchItems="ingredients"
-              name="id"
+              name="ingredient"
               initialSearch={ingredient.name}
               setIngredientFn={handleSetIngredient}
               inline

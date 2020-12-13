@@ -51,7 +51,8 @@ const AddIngredientsForm = ({ toggleModal }) => {
             </Field>
             <ErrorMessage name="name" component={InputError} />
             <InputLiveSearch
-              withAdding
+              withAddingNewItem
+              withAddingToFormikContext
               id="unitId"
               name="unitId"
               searchItems="units"
@@ -59,7 +60,8 @@ const AddIngredientsForm = ({ toggleModal }) => {
             />
             <ErrorMessage name="unitId" component={InputError} />
             <InputLiveSearch
-              withAdding
+              withAddingNewItem
+              withAddingToFormikContext
               id="shopCategoryId"
               name="shopCategoryId"
               searchItems="shopCategories"

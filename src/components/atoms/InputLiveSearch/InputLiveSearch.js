@@ -10,7 +10,15 @@ import * as S from './InputLiveSearchStyles';
 import useFetchItems from '../../../hooks/useFetchItems';
 import useFetchItemsByParam from '../../../hooks/useFetchItemsByParam';
 
-const InputLiveSearch = ({ searchItems, label, name, withAdding, setIngredientFn, inline }) => {
+const InputLiveSearch = ({
+  searchItems,
+  label,
+  name,
+  withAddingNewItem,
+  withAddingToFormikContext,
+  setIngredientFn,
+  inline,
+}) => {
   const { values } = useFormikContext();
   const [search, setSearch] = useState('');
   const [autocomplete, setAutocomplete] = useState(false);
@@ -24,7 +32,9 @@ const InputLiveSearch = ({ searchItems, label, name, withAdding, setIngredientFn
   const activeItem = useFetchItemsByParam(searchItems, 'id', values[name])[0];
 
   const handleInputChange = e => {
-    values[name] = '';
+    if (withAddingToFormikContext) {
+      values[name] = '';
+    }
     setSearch(e.target.value);
   };
 
@@ -41,7 +51,9 @@ const InputLiveSearch = ({ searchItems, label, name, withAdding, setIngredientFn
 
   const handleResultClick = (id, itemName, e) => {
     e.preventDefault();
-    values[name] = id;
+    if (withAddingToFormikContext) {
+      values[name] = id;
+    }
     setSearch(itemName);
     setAutocomplete(false);
     setIngredientFn(id);
@@ -83,7 +95,7 @@ const InputLiveSearch = ({ searchItems, label, name, withAdding, setIngredientFn
       />
       {(autocomplete || search) && !activeItem && (
         <S.SearchResultWrapper>
-          {search && search.length > 0 && !items.find(c => c.name === search) && withAdding && (
+          {search && search.length > 0 && !items.find(c => c.name === search) && withAddingNewItem && (
             <>
               <S.AddItemOption onClick={handleAddCategory}>
                 Add: <S.AddItemName>{search}</S.AddItemName>
@@ -114,13 +126,15 @@ InputLiveSearch.propTypes = {
   label: PropTypes.string.isRequired,
   searchItems: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  withAdding: PropTypes.bool,
+  withAddingNewItem: PropTypes.bool,
+  withAddingToFormikContext: PropTypes.bool,
   setIngredientFn: PropTypes.func,
   inline: PropTypes.bool,
 };
 
 InputLiveSearch.defaultProps = {
-  withAdding: false,
+  withAddingNewItem: false,
+  withAddingToFormikContext: false,
   setIngredientFn: () => null,
   inline: false,
 };
