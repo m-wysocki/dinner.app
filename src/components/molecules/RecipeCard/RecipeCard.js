@@ -3,16 +3,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { BiTimeFive, BiHash, BiBookBookmark } from 'react-icons/bi';
 import { toast } from 'react-toastify';
-import { connect } from 'react-redux';
 import Heading from '../../atoms/Heading/Heading';
-import { removeItem } from '../../../actions';
 import * as S from './RecipeCardStyles';
 import useFetchItemsByParam from '../../../hooks/useFetchItemsByParam';
 import emptyPlateImage from '../../../assets/images/empty-plate.jpg';
 import ShoppingListContext from '../../../context/ShoppingListContext';
 import Button from '../../atoms/Button/Button';
 
-const RecipeCard = ({ recipe, removeRecipe }) => {
+const RecipeCard = ({ recipe }) => {
   const { id, slug, name, image, preparationTime, categoryId, bookId, sourceType } = recipe;
   const book = useFetchItemsByParam('books', 'id', bookId)[0];
   const category = useFetchItemsByParam('categories', 'id', categoryId)[0];
@@ -66,9 +64,6 @@ const RecipeCard = ({ recipe, removeRecipe }) => {
         >
           {shoppingList.includes(id) ? '📔 remove' : '📔 add'}
         </Button>
-        <Button small secondary onClick={() => removeRecipe('recipes', id)}>
-          x
-        </Button>
         <Link to={`/recipes/${id}/${slug}`}>
           <Button small>more</Button>
         </Link>
@@ -77,11 +72,7 @@ const RecipeCard = ({ recipe, removeRecipe }) => {
   );
 };
 
-const mapDispatchToProp = dispatch => ({
-  removeRecipe: (itemType, id) => dispatch(removeItem(itemType, id)),
-});
-
-export default connect(null, mapDispatchToProp)(RecipeCard);
+export default RecipeCard;
 
 RecipeCard.propTypes = {
   recipe: PropTypes.shape({
@@ -94,5 +85,4 @@ RecipeCard.propTypes = {
     bookId: PropTypes.string,
     sourceType: PropTypes.string.isRequired,
   }).isRequired,
-  removeRecipe: PropTypes.func.isRequired,
 };

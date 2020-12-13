@@ -23,7 +23,7 @@ const Heading = styled.h2`
       text-transform: lowercase;
       text-align: center;
       font-size: 6rem;
-      margin-bottom: 5rem;
+      margin-bottom: ${({ mb }) => mb || '5rem'};
       &:after {
         display: none;
       }

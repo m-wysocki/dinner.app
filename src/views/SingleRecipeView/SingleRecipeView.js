@@ -1,5 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Loader from '../../components/atoms/Loader/Loader';
 import useFetchItemsByParam from '../../hooks/useFetchItemsByParam';
 import Heading from '../../components/atoms/Heading/Heading';
@@ -7,6 +10,8 @@ import SubpageTemplate from '../../templates/SubpageTemplate';
 import * as S from './SingleRecipeViewStyles';
 import StyledLink from '../../components/atoms/StyledLink/StyledLink';
 import emptyPlateImage from '../../assets/images/empty-plate.jpg';
+import Button from '../../components/atoms/Button/Button';
+import { removeItem } from '../../actions';
 
 const SingleRecipeView = ({ match }) => {
   const { params } = match;
@@ -21,15 +26,36 @@ const SingleRecipeView = ({ match }) => {
   const bookName = book ? book.name : null;
   const categoryName = category ? category.name : null;
 
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const removeRecipe = (itemType, id) => dispatch(removeItem(itemType, id));
+  const handleRemoveRecipe = () => {
+    removeRecipe('recipes', recipe.id);
+    toast.success('The recipe was removed successfully');
+    setTimeout(() => {
+      history.push('/recipes');
+    }, 1500);
+  };
+
   if (!recipe) return <Loader />;
   return (
     <SubpageTemplate>
       {recipe ? (
         <>
-          <Heading thin>{recipe.name}</Heading>
+          <Heading thin mb="0">
+            {recipe.name}
+          </Heading>
           <S.Wrapper>
             <img src={recipe.image || emptyPlateImage} alt={recipe.name} />
             <div>
+              <S.Buttons>
+                <Button secondary small>
+                  edit
+                </Button>
+                <Button secondary small onClick={handleRemoveRecipe}>
+                  remove
+                </Button>
+              </S.Buttons>
               <S.Info>
                 <Heading small>Recipe information</Heading>
                 <ul>
