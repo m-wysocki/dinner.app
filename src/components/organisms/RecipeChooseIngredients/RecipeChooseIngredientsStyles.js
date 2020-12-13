@@ -34,5 +34,3 @@ export const MissingIngredient = styled.div`
   border-left: solid 1px ${({ theme }) => theme.colors.grey};
   padding-left: 5rem;
 `;
-
-export const IngredientList = styled.div``;

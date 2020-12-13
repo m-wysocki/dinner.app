@@ -11,6 +11,7 @@ import Input from '../../atoms/Input/Input';
 import * as S from './RecipeChooseIngredientsStyles';
 import InputError from '../../atoms/InputError/InputError';
 import InputLiveSearch from '../../atoms/InputLiveSearch/InputLiveSearch';
+import DeleteButton from '../../atoms/DeleteButton/DeleteButton';
 
 const RecipeChooseIngredients = () => {
   const ingredientItems = 'ingredients';
@@ -70,6 +71,11 @@ const RecipeChooseIngredients = () => {
     } else {
       setIsFormValid(false);
     }
+  };
+
+  const handleRemoveIngredient = (e, id) => {
+    e.preventDefault();
+    setIngredients(ingredients.filter(ingredientItem => ingredientItem.id !== id));
   };
 
   useEffect(() => {
@@ -138,16 +144,19 @@ const RecipeChooseIngredients = () => {
       <ErrorMessage name="ingredients" component={InputError} />
 
       {values.ingredients && values.ingredients.length > 0 && (
-        <S.IngredientList>
+        <div>
           <Heading small>Ingredients</Heading>
           <ul>
             {values.ingredients.map(item => (
               <li key={item.id}>
-                {item.name} {item.amount} {item.unit}
+                {item.name} {item.amount} {item.unit}{' '}
+                <DeleteButton onClickFn={e => handleRemoveIngredient(e, item.id)}>
+                  delete
+                </DeleteButton>
               </li>
             ))}
           </ul>
-        </S.IngredientList>
+        </div>
       )}
     </div>
   );
