@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { string, number } from 'yup';
 import { ErrorMessage, useFormikContext } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems } from '../../../actions';
@@ -30,11 +31,25 @@ const RecipeChooseIngredients = () => {
 
   const [ingredient, setIngredient] = useState(initialIngredient);
 
-  const [isFormValid, setIsFormValid] = useState(true);
+  const [isIdValid, setIdValid] = useState(true);
+  const [isAmountValid, setAmountValid] = useState(true);
   const [ingredients, setIngredients] = useState(values.ingredients);
+
+  // const schema = object().shape({
+  //   ingredientId: string().required(),
+  //   ingredientAmount: number()
+  //     .min(0)
+  //     .required(),
+  // });
+
+  const idSchema = string().required();
+  const amountSchema = number()
+    .min(0)
+    .required();
 
   const handleSetIngredient = ingredientId => {
     if (ingredientId) {
+      setIdValid(true);
       const selectedIngredient = items.filter(item => item.id === ingredientId)[0];
       const unit = units.filter(item => item.id === selectedIngredient.unitId)[0];
       setIngredient(prevState => ({
@@ -44,6 +59,7 @@ const RecipeChooseIngredients = () => {
         unit: unit.name,
       }));
     } else {
+      setIdValid(false);
       setIngredient(prevState => ({
         ...prevState,
         id: '',
@@ -56,20 +72,22 @@ const RecipeChooseIngredients = () => {
   const handleAmountChange = event => {
     const { target } = event;
     const { value } = target;
+    const valueReplaced = value.replace(',', '.');
     setIngredient(prevState => ({
       ...prevState,
-      amount: value,
+      amount: valueReplaced,
     }));
+    setAmountValid(amountSchema.isValidSync(valueReplaced));
   };
 
   const handleAddIngredient = e => {
     e.preventDefault();
-    if (ingredient.id && ingredient.amount) {
-      setIsFormValid(true);
+    if (amountSchema.isValidSync(ingredient.amount) && idSchema.isValidSync(ingredient.id)) {
       setIngredients(prevState => [...prevState, ingredient]);
       setIngredient(initialIngredient);
     } else {
-      setIsFormValid(false);
+      setIdValid(idSchema.isValidSync(ingredient.id));
+      setAmountValid(amountSchema.isValidSync(ingredient.amount));
     }
   };
 
@@ -101,9 +119,7 @@ const RecipeChooseIngredients = () => {
               setIngredientFn={handleSetIngredient}
               inline
             />
-            {!isFormValid && !ingredient.id && (
-              <InputError absolute>This field is required</InputError>
-            )}
+            {!isIdValid && <InputError absolute>This field is required</InputError>}
           </S.IngredientWrapper>
 
           <S.IngredientWrapper>
@@ -116,9 +132,7 @@ const RecipeChooseIngredients = () => {
               onChange={handleAmountChange}
             />
 
-            {!isFormValid && !ingredient.amount && (
-              <InputError absolute>This field is required</InputError>
-            )}
+            {!isAmountValid && <InputError absolute>This field must be a number</InputError>}
           </S.IngredientWrapper>
 
           <S.Unit ref={unitTextRef}>{ingredient.unit}</S.Unit>

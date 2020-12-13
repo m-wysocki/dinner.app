@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
@@ -12,6 +12,7 @@ import StyledLink from '../../components/atoms/StyledLink/StyledLink';
 import emptyPlateImage from '../../assets/images/empty-plate.jpg';
 import Button from '../../components/atoms/Button/Button';
 import { removeItem } from '../../actions';
+import ShoppingListContext from '../../context/ShoppingListContext';
 
 const SingleRecipeView = ({ match }) => {
   const { params } = match;
@@ -36,6 +37,16 @@ const SingleRecipeView = ({ match }) => {
       history.push('/recipes');
     }, 1500);
   };
+  const [shoppingList, setShoppingList] = useContext(ShoppingListContext);
+  const handleChangeShoppingList = id => {
+    if (!shoppingList.includes(id)) {
+      setShoppingList([...shoppingList, id]);
+      toast.success('👌 Ingredients were added to your shopping list');
+    } else {
+      setShoppingList(shoppingList.filter(recipeId => recipeId !== id));
+      toast.error('🤷‍♂️ Ingredients were removed from your shopping list');
+    }
+  };
 
   if (!recipe) return <Loader />;
   return (
@@ -49,11 +60,24 @@ const SingleRecipeView = ({ match }) => {
             <img src={recipe.image || emptyPlateImage} alt={recipe.name} />
             <div>
               <S.Buttons>
+                <Button
+                  small
+                  secondary
+                  remove={shoppingList.includes(recipe.id)}
+                  add={!shoppingList.includes(recipe.id)}
+                  onClick={() => handleChangeShoppingList(recipe.id)}
+                >
+                  {shoppingList.includes(recipe.id) ? '📔 remove from list' : '📔 add to list'}
+                </Button>
                 <Button secondary small>
                   edit
                 </Button>
                 <Button secondary small onClick={handleRemoveRecipe}>
-                  remove
+                  <span role="img" aria-label="be careful - removing">
+                    ⛔
+                  </span>
+                  &nbsp;
+                  <span>remove</span>
                 </Button>
               </S.Buttons>
               <S.Info>
@@ -110,7 +134,8 @@ const SingleRecipeView = ({ match }) => {
           </S.Wrapper>
         </>
       ) : (
-        <p>Niestety nie udało się odnaleźć takiego przepisu</p>
+        // eslint-disable-next-line react/no-unescaped-entities
+        <p>This recipe doesn't exist</p>
       )}
     </SubpageTemplate>
   );

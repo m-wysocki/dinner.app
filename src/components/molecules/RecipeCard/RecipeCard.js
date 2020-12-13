@@ -17,13 +17,13 @@ const RecipeCard = ({ recipe }) => {
   const bookName = book ? book.name : null;
   const categoryName = category ? category.name : null;
   const [shoppingList, setShoppingList] = useContext(ShoppingListContext);
-  const handleAddToList = () => {
+  const handleChangeShoppingList = () => {
     if (!shoppingList.includes(id)) {
       setShoppingList([...shoppingList, id]);
       toast.success('👌 Ingredients were added to your shopping list');
     } else {
       setShoppingList(shoppingList.filter(recipeId => recipeId !== id));
-      toast.error('🤷‍♂️Ingredients were removed from your shopping list');
+      toast.error('🤷‍♂️ Ingredients were removed from your shopping list');
     }
   };
   return (
@@ -60,9 +60,9 @@ const RecipeCard = ({ recipe }) => {
           secondary
           remove={shoppingList.includes(id)}
           add={!shoppingList.includes(id)}
-          onClick={handleAddToList}
+          onClick={handleChangeShoppingList}
         >
-          {shoppingList.includes(id) ? '📔 remove' : '📔 add'}
+          {shoppingList.includes(id) ? '📔 remove from list' : '📔 add to list'}
         </Button>
         <Link to={`/recipes/${id}/${slug}`}>
           <Button small>more</Button>
