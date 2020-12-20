@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Heading from '../../components/atoms/Heading/Heading';
 import SubpageTemplate from '../../templates/SubpageTemplate';
 import ShoppingListContext from '../../context/ShoppingListContext';
 import useFetchItems from '../../hooks/useFetchItems';
 import RecipesList from '../../components/organisms/RecipesList/RecipesList';
+import StyledLink from '../../components/atoms/StyledLink/StyledLink';
 
 const IngredientsWrapper = styled.div`
   margin-top: 10rem;
@@ -59,11 +61,18 @@ const ShoppingListView = () => {
   return (
     <SubpageTemplate>
       <Heading thin>your shopping list</Heading>
-      {filteredRecipes && (
+      {filteredRecipes && filteredRecipes.length > 0 ? (
         <>
           <Heading small>Recipes list</Heading>
           <RecipesList recipes={filteredRecipes} />
         </>
+      ) : (
+        <p>
+          There&apos;s no ingredients.{' '}
+          <StyledLink as={Link} to="/recipes">
+            Add some recipes to the list.
+          </StyledLink>
+        </p>
       )}
       {finalIngredientList && finalIngredientList.length > 0 && (
         <IngredientsWrapper>

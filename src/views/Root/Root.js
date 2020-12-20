@@ -13,10 +13,11 @@ import ShoppingListView from '../ShoppingListView/ShoppingListView';
 import ShoppingListContext from '../../context/ShoppingListContext';
 
 const Root = () => {
-  const [shoppingList, setShoppingList] = useState([
-    'Exr3LfC4vMhm3giY5hUw',
-    'QQ29wWOFoYBoDrOo3XXC',
-  ]);
+  // const [shoppingList, setShoppingList] = useState([
+  //   'Exr3LfC4vMhm3giY5hUw',
+  //   'QQ29wWOFoYBoDrOo3XXC',
+  // ]);
+  const [shoppingList, setShoppingList] = useState([]);
   return (
     <Provider store={store}>
       <ShoppingListContext.Provider value={[shoppingList, setShoppingList]}>

@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
     right: 0;
   }
   .Toastify__toast-container {
-    width: 400px;
+    width: 500px;
     max-width: 95vw;
     text-align: center;
   }

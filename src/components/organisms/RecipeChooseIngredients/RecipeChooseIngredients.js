@@ -35,13 +35,6 @@ const RecipeChooseIngredients = () => {
   const [isAmountValid, setAmountValid] = useState(true);
   const [ingredients, setIngredients] = useState(values.ingredients);
 
-  // const schema = object().shape({
-  //   ingredientId: string().required(),
-  //   ingredientAmount: number()
-  //     .min(0)
-  //     .required(),
-  // });
-
   const idSchema = string().required();
   const amountSchema = number()
     .min(0)
