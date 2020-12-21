@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import slugify from 'react-slugify';
 import { array, object, string } from 'yup';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 import FormikWizard from '../FormikWizard/FormikWizard';
 import FormikWizardStep from '../FormikWizardStep/FormikWizardStep';
 import { addItem } from '../../../actions';
