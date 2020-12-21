@@ -1,6 +1,5 @@
 {
-  "name": "dinner.",
-  "homepage": "https://m-wysocki.github.io/dinner.",
+  "name": "dinner.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
