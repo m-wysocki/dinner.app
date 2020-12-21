@@ -2,6 +2,8 @@
 
 ### Aplikacja generująca listę zakupów na podstawie wybranych przepisów kulinarnych
 
+https://dinner-react-app.netlify.app/
+
 **Najważniejsze cechy aplikacji:**
 - generowanie listy zakupów na podstawie wybranych przepisów
 - wygenerowana lista zawiera listę zsumowanych składników z zaznaczonych przepisów z podziałem na kategorie sklepowe
