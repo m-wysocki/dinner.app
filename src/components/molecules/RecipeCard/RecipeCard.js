@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { BiTimeFive, BiHash, BiBookBookmark } from 'react-icons/bi';
-import { toast } from 'react-toastify';
 import Heading from '../../atoms/Heading/Heading';
 import * as S from './RecipeCardStyles';
 import useFetchItemsByParam from '../../../hooks/useFetchItemsByParam';
 import emptyPlateImage from '../../../assets/images/empty-plate.jpg';
-import ShoppingListContext from '../../../context/ShoppingListContext';
 import Button from '../../atoms/Button/Button';
+import AddToShoppingList from '../../atoms/AddToShoppingList/AddToShoppingList';
 
 const RecipeCard = ({ recipe }) => {
   const { id, slug, name, image, preparationTime, categoryId, bookId, sourceType } = recipe;
@@ -16,16 +15,7 @@ const RecipeCard = ({ recipe }) => {
   const category = useFetchItemsByParam('categories', 'id', categoryId)[0];
   const bookName = book ? book.name : null;
   const categoryName = category ? category.name : null;
-  const [shoppingList, setShoppingList] = useContext(ShoppingListContext);
-  const handleChangeShoppingList = () => {
-    if (!shoppingList.includes(id)) {
-      setShoppingList([...shoppingList, id]);
-      toast.success('👌 Ingredients were added to your shopping list');
-    } else {
-      setShoppingList(shoppingList.filter(recipeId => recipeId !== id));
-      toast.error('🤷‍♂️ Ingredients were removed from your shopping list');
-    }
-  };
+
   return (
     <S.StyledRecipe>
       <S.Image>
@@ -55,15 +45,7 @@ const RecipeCard = ({ recipe }) => {
         </S.Info>
       </S.Content>
       <S.Footer>
-        <Button
-          small
-          secondary
-          remove={shoppingList.includes(id)}
-          add={!shoppingList.includes(id)}
-          onClick={handleChangeShoppingList}
-        >
-          {shoppingList.includes(id) ? '📔 remove from list' : '📔 add to list'}
-        </Button>
+        <AddToShoppingList recipeId={id} />
         <Link to={`/recipes/${id}/${slug}`}>
           <Button small>more</Button>
         </Link>

@@ -11,7 +11,8 @@
   "globals": {
     "console": true,
     "document": true,
-    "window": true
+    "window": true,
+    "localStorage": true
   },
   "rules": {
     "import/prefer-default-export": 0,
