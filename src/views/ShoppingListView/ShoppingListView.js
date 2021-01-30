@@ -1,22 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import Heading from '../../components/atoms/Heading/Heading';
 import SubpageTemplate from '../../templates/SubpageTemplate';
 import ShoppingListContext from '../../context/ShoppingListContext';
 import useFetchItems from '../../hooks/useFetchItems';
 import RecipesList from '../../components/organisms/RecipesList/RecipesList';
 import StyledLink from '../../components/atoms/StyledLink/StyledLink';
-
-const IngredientsWrapper = styled.div`
-  margin-top: 10rem;
-`;
-
-const Ingredients = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5rem;
-`;
+import IngredientList from '../../components/organisms/IngredientList/IngredientList';
 
 const ShoppingListView = () => {
   const [shoppingList] = useContext(ShoppingListContext);
@@ -61,10 +51,12 @@ const ShoppingListView = () => {
   return (
     <SubpageTemplate>
       <Heading thin>your shopping list</Heading>
+
       {filteredRecipes && filteredRecipes.length > 0 ? (
         <>
           <Heading small>Recipes list</Heading>
           <RecipesList recipes={filteredRecipes} />
+          <IngredientList finalIngredientList={finalIngredientList} />
         </>
       ) : (
         <p>
@@ -73,31 +65,6 @@ const ShoppingListView = () => {
             Add some recipes to the list.
           </StyledLink>
         </p>
-      )}
-      {finalIngredientList && finalIngredientList.length > 0 && (
-        <IngredientsWrapper>
-          <Heading small>Ingredient list</Heading>
-
-          <Ingredients>
-            {finalIngredientList.map(shopCategory => {
-              if (shopCategory[1] && shopCategory[1].length > 0) {
-                return (
-                  <div key={shopCategory[0]}>
-                    <h3>{shopCategory[0]}</h3>
-                    <ul>
-                      {shopCategory[1].map(ingredient => (
-                        <li key={ingredient.id}>
-                          {ingredient.name} {ingredient.amount} {ingredient.unit}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              }
-              return null;
-            })}
-          </Ingredients>
-        </IngredientsWrapper>
       )}
     </SubpageTemplate>
   );
