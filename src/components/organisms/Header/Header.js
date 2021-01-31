@@ -9,6 +9,7 @@ import Badge from '../../atoms/Badge/Badge';
 
 const Header = ({ subpage }) => {
   const [shoppingList] = useContext(ShoppingListContext);
+
   return (
     <StyledHeader subpage={subpage}>
       <Link to="/">

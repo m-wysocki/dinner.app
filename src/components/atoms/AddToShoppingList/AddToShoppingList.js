@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import ShoppingListContext from '../../../context/ShoppingListContext';
 import Button from '../Button/Button';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
 const AddToShoppingList = ({ recipeId }) => {
   const [shoppingList, setShoppingList] = useContext(ShoppingListContext);
+  const [, setShoppingListStorage] = useLocalStorage('shoppingList', shoppingList);
 
   const handleChangeShoppingList = () => {
     if (!shoppingList.includes(recipeId)) {
@@ -16,6 +18,10 @@ const AddToShoppingList = ({ recipeId }) => {
       toast.error('🤷‍♂️ Ingredients were removed from your shopping list');
     }
   };
+
+  useEffect(() => {
+    setShoppingListStorage(shoppingList);
+  }, [shoppingList, setShoppingListStorage]);
 
   return (
     <Button
