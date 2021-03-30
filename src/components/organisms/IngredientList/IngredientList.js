@@ -14,15 +14,30 @@ const Ingredients = styled.div`
   grid-gap: 5rem;
 `;
 
-const IngredientList = ({finalIngredientList}) => {
+const IngredientList = ({ ingredients }) => {
+  const ingredientsArray = Object.values(ingredients);
+  const shopCategories = [];
+
+  ingredientsArray.forEach(ingredient => {
+    if (!shopCategories.includes(ingredient.shopCategory)) {
+      shopCategories.push(ingredient.shopCategory);
+    }
+  });
+
   return (
     <IngredientsWrapper>
       <Heading small>Ingredient list</Heading>
-
       <Ingredients>
-        {finalIngredientList.map(ingredientsByCategory =>
-          <IngredientsByCategory key={ingredientsByCategory[0]} ingredientsByCategory={ingredientsByCategory} />
-          )}
+        {shopCategories.length > 0 &&
+          shopCategories.map(shopCategory => (
+            <IngredientsByCategory
+              key={shopCategory}
+              shopCategory={shopCategory}
+              ingredients={ingredientsArray.filter(
+                ingredient => ingredient.shopCategory === shopCategory,
+              )}
+            />
+          ))}
       </Ingredients>
     </IngredientsWrapper>
   );
@@ -31,5 +46,5 @@ const IngredientList = ({finalIngredientList}) => {
 export default IngredientList;
 
 IngredientList.propTypes = {
-  finalIngredientList: PropTypes.instanceOf(Array).isRequired
+  ingredients: PropTypes.instanceOf(Object).isRequired,
 };

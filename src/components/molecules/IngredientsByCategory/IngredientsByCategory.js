@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const IngredientsByCategory = ({ ingredientsByCategory }) => {
-  const [ingredientCategory, ingredients] = ingredientsByCategory;
-
+const IngredientsByCategory = ({ shopCategory, ingredients }) => {
   return (
     <>
       {ingredients.length > 0 && (
         <div>
-          <h3>{ingredientCategory}</h3>
+          <h3>{shopCategory}</h3>
           <ul>
             {ingredients.map(ingredient => (
               <li key={ingredient.id}>
-                {ingredient.name} {ingredient.amount} {ingredient.unit}
+                {ingredient.name} - {ingredient.amount} {ingredient.unit}
               </li>
             ))}
           </ul>
@@ -25,5 +23,6 @@ const IngredientsByCategory = ({ ingredientsByCategory }) => {
 export default IngredientsByCategory;
 
 IngredientsByCategory.propTypes = {
-  ingredientsByCategory: PropTypes.instanceOf(Array).isRequired,
+  shopCategory: PropTypes.string.isRequired,
+  ingredients: PropTypes.instanceOf(Array).isRequired,
 };

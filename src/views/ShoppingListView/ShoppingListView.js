@@ -11,43 +11,10 @@ import IngredientList from '../../components/organisms/IngredientList/Ingredient
 const ShoppingListView = () => {
   const [shoppingList] = useContext(ShoppingListContext);
   const recipes = useFetchItems('recipes');
-  const ingredients = useFetchItems('ingredients');
-  const shopCategories = useFetchItems('shopCategories');
-  const ingredientList = [];
-  let ingredientListReduced = [];
-  let finalIngredientList = [];
 
-  const filteredRecipes = recipes && recipes.filter(recipe => shoppingList.includes(recipe.id));
+  const filteredRecipes =
+    recipes && recipes.filter(recipe => shoppingList.recipes.includes(recipe.id));
 
-  if (shoppingList && shoppingList.length > 0 && recipes && ingredients && shopCategories) {
-    filteredRecipes.forEach(recipe => {
-      ingredientList.push(...recipe.ingredients);
-    });
-
-    ingredientListReduced = Array.from(
-      ingredientList
-        .reduce((acc, { id, amount, ...r }) => {
-          const current = acc.get(id) || { ...r, id, amount: 0 };
-          const { shopCategoryId } = ingredients.find(item => item.id === id) || null;
-          const shopCategoryName = shopCategories.find(item => item.id === shopCategoryId);
-          return acc.set(id, {
-            ...current,
-            shopCategoryId,
-            shopCategoryName: shopCategoryName.name,
-            amount: current.amount + parseFloat(amount),
-          });
-        }, new Map())
-        .values(),
-    );
-    const finalIngredientMap = new Map();
-    shopCategories.forEach(c => {
-      finalIngredientMap.set(
-        c.name,
-        ingredientListReduced.filter(i => i.shopCategoryId === c.id),
-      );
-    });
-    finalIngredientList = Array.from(finalIngredientMap);
-  }
   return (
     <SubpageTemplate>
       <Heading thin>your shopping list</Heading>
@@ -56,7 +23,9 @@ const ShoppingListView = () => {
         <>
           <Heading small>Recipes list</Heading>
           <RecipesList recipes={filteredRecipes} />
-          <IngredientList finalIngredientList={finalIngredientList} />
+          {shoppingList && shoppingList.ingredients && (
+            <IngredientList ingredients={shoppingList.ingredients} />
+          )}
         </>
       ) : (
         <p>

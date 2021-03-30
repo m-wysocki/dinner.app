@@ -9,6 +9,7 @@ import Badge from '../../atoms/Badge/Badge';
 
 const Header = ({ subpage }) => {
   const [shoppingList] = useContext(ShoppingListContext);
+  const { recipes } = shoppingList;
 
   return (
     <StyledHeader subpage={subpage}>
@@ -26,7 +27,7 @@ const Header = ({ subpage }) => {
           add recipe
         </MenuItem>
         <Button as={Link} small="true" to="/shopping-list">
-          shopping list {shoppingList.length > 0 && <Badge number={shoppingList.length} />}
+          shopping list {recipes.length > 0 && <Badge number={recipes.length} />}
         </Button>
       </div>
     </StyledHeader>

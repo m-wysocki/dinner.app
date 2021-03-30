@@ -11,11 +11,11 @@ import AddRecipeView from '../AddRecipeView/AddRecipeView';
 import SingleRecipeView from '../SingleRecipeView/SingleRecipeView';
 import SingleCategoryView from '../SingleCategoryView/SingleCategoryView';
 import ShoppingListView from '../ShoppingListView/ShoppingListView';
-import ShoppingListContext from '../../context/ShoppingListContext';
+import ShoppingListContext, { initialShoppingListContext } from '../../context/ShoppingListContext';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Root = () => {
-  const [shoppingListStorage] = useLocalStorage('shoppingList', []);
+  const [shoppingListStorage] = useLocalStorage('shoppingList', initialShoppingListContext);
   const [shoppingList, setShoppingList] = useState(shoppingListStorage);
   return (
     <Provider store={store}>

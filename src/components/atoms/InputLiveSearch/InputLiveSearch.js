@@ -79,6 +79,7 @@ const InputLiveSearch = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeItem, searchItems, wrapperRef, autocomplete]);
 
   return (
