@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { StyledHeader, MenuItem } from './HeaderStyles';
 import Logo from '../../atoms/Logo/Logo';
-import ShoppingListContext from '../../../context/ShoppingListContext';
 import Button from '../../atoms/Button/Button';
 import Badge from '../../atoms/Badge/Badge';
+import useChangeShoppingList from '../../../hooks/useChangeShoppingList';
 
 const Header = ({ subpage }) => {
-  const [shoppingList] = useContext(ShoppingListContext);
+  const [shoppingList] = useChangeShoppingList();
   const { recipes } = shoppingList;
 
   return (

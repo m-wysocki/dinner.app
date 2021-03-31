@@ -35,26 +35,6 @@ const useChangeShoppingList = () => {
     return allIngredients;
   }
 
-  // const shopingListShape = {
-  //   recipes: ['id1', 'id2', 'id3'],
-  //   ingredients: {
-  //     idIngredient: {
-  //       name: 'test',
-  //       amount: 200,
-  //       unit: 'pc.',
-  //       category: 'idCategory',
-  //       toBuy: true,
-  //     },
-  //     idIngredient2: {
-  //       name: 'test',
-  //       amount: 200,
-  //       unit: 'pc.',
-  //       category: 'idCategory',
-  //       toBuy: true,
-  //     },
-  //   },
-  // };
-
   function changeShoppingList(recipeId) {
     const { recipes } = shoppingList;
 
@@ -75,11 +55,20 @@ const useChangeShoppingList = () => {
     }
   }
 
+  function toggleToBuyIngredient(ingredientId) {
+    const { ingredients } = shoppingList;
+    ingredients[ingredientId].toBuy = !ingredients[ingredientId].toBuy;
+    setShoppingList({
+      ...shoppingList,
+      ingredients,
+    });
+  }
+
   useEffect(() => {
     setShoppingListStorage(shoppingList);
   }, [shoppingList, setShoppingListStorage]);
 
-  return [shoppingList, changeShoppingList];
+  return [shoppingList, changeShoppingList, toggleToBuyIngredient];
 };
 
 export default useChangeShoppingList;

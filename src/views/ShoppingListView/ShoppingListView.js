@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Heading from '../../components/atoms/Heading/Heading';
 import SubpageTemplate from '../../templates/SubpageTemplate';
-import ShoppingListContext from '../../context/ShoppingListContext';
 import useFetchItems from '../../hooks/useFetchItems';
 import RecipesList from '../../components/organisms/RecipesList/RecipesList';
 import StyledLink from '../../components/atoms/StyledLink/StyledLink';
 import IngredientList from '../../components/organisms/IngredientList/IngredientList';
+import useChangeShoppingList from '../../hooks/useChangeShoppingList';
 
 const ShoppingListView = () => {
-  const [shoppingList] = useContext(ShoppingListContext);
+  const [shoppingList] = useChangeShoppingList();
   const recipes = useFetchItems('recipes');
 
   const filteredRecipes =
