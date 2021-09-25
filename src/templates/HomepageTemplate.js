@@ -5,6 +5,9 @@ import Header from '../components/organisms/Header/Header';
 
 const ViewsContainer = styled.div`
   padding: 0 ${({ theme }) => theme.padding};
+  @media ${({ theme }) => theme.media.maxMobile} {
+    padding: 0 ${({ theme }) => theme.paddingMobile};
+  }
 `;
 
 const HomepageTemplate = ({ children }) => {

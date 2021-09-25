@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
   }
   html {
     font-size: 0.525vw;
@@ -16,14 +17,19 @@ const GlobalStyle = createGlobalStyle`
     @media (max-width: 1199px) {
       font-size: 0.725vw;
     }
+    @media ${theme.media.maxMobile} {
+        font-size: 10px;    
+    }
   }
   body {
       font-size: 1.6rem;
-      font-family: 'Montserrat', sans-serif;
       margin: 0 0 10rem 0;
       padding: 0;
       color: #000000;
       line-height: 1.5;
+      @media ${theme.media.maxMobile} {
+        font-size: 1.2rem 
+      }
   }
   a{
     text-decoration: none;

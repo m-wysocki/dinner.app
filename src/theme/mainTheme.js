@@ -12,10 +12,16 @@ export const theme = {
     text: '#000000',
     textLight: '#989898',
   },
+
+  media: {
+    maxMobile: '(max-width: 767px)',
+  },
+
   thin: 200,
   light: 300,
   regular: 400,
   medium: 500,
   bold: 600,
   padding: '10rem',
+  paddingMobile: '2rem',
 };

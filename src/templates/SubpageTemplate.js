@@ -6,6 +6,11 @@ import Header from '../components/organisms/Header/Header';
 const ViewsContainer = styled.div`
   margin: 0 ${({ theme }) => theme.padding};
   position: relative;
+
+  @media ${({ theme }) => theme.media.maxMobile} {
+    margin: 0 ${({ theme }) => theme.paddingMobile};
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -16,6 +21,12 @@ const ViewsContainer = styled.div`
     right: 0;
     margin: 0 5rem;
     z-index: -1;
+
+    @media ${({ theme }) => theme.media.maxMobile} {
+      margin: 0 2rem;
+      top: 2rem;
+      bottom: -2rem;
+    }
   }
 `;
 

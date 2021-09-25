@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { StyledHeader, MenuItem } from './HeaderStyles';
+
 import Logo from '../../atoms/Logo/Logo';
-import Button from '../../atoms/Button/Button';
 import Badge from '../../atoms/Badge/Badge';
+
 import useChangeShoppingList from '../../../hooks/useChangeShoppingList';
+
+import { StyledHeader, MenuItem, StyledButton, StyledMenu } from './HeaderStyles';
 
 const Header = ({ subpage }) => {
   const [shoppingList] = useChangeShoppingList();
@@ -16,20 +18,24 @@ const Header = ({ subpage }) => {
       <Link to="/">
         <Logo />
       </Link>
-      <div>
+
+      <StyledMenu>
         <MenuItem as={Link} to="/">
           home
         </MenuItem>
+
         <MenuItem as={Link} to="/recipes">
           recipes
         </MenuItem>
+
         <MenuItem as={Link} to="/add-recipe">
           add recipe
         </MenuItem>
-        <Button as={Link} small="true" to="/shopping-list">
+
+        <StyledButton as={Link} to="/shopping-list" small="true">
           shopping list {recipes.length > 0 && <Badge number={recipes.length} />}
-        </Button>
-      </div>
+        </StyledButton>
+      </StyledMenu>
     </StyledHeader>
   );
 };
