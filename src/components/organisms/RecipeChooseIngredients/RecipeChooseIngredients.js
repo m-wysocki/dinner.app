@@ -17,16 +17,23 @@ import DeleteButton from '../../atoms/DeleteButton/DeleteButton';
 const RecipeChooseIngredients = () => {
   const ingredientItems = 'ingredients';
   const unitItems = 'units';
+  const shopCategoryItems = 'shopCategories';
+
   const { values } = useFormikContext();
+
   const dispatch = useDispatch();
   const items = useSelector(state => state[ingredientItems]);
   const units = useSelector(state => state[unitItems]);
+  const shopCategories = useSelector(state => state[shopCategoryItems]);
+
   const unitTextRef = useRef(null);
   const initialIngredient = {
     id: '',
     name: '',
     amount: '',
     unit: '',
+    shopCategory: '',
+    toBuy: true,
   };
 
   const [ingredient, setIngredient] = useState(initialIngredient);
@@ -45,11 +52,15 @@ const RecipeChooseIngredients = () => {
       setIdValid(true);
       const selectedIngredient = items.filter(item => item.id === ingredientId)[0];
       const unit = units.filter(item => item.id === selectedIngredient.unitId)[0];
+      const shopCategory = shopCategories.filter(
+        item => item.id === selectedIngredient.shopCategoryId,
+      )[0];
       setIngredient(prevState => ({
         ...prevState,
         id: ingredientId,
-        name: selectedIngredient.name,
-        unit: unit.name,
+        name: selectedIngredient ? selectedIngredient.name : '',
+        unit: unit ? unit.name : '',
+        shopCategory: shopCategory ? shopCategory.name : '',
       }));
     } else {
       setIdValid(false);
@@ -58,6 +69,8 @@ const RecipeChooseIngredients = () => {
         id: '',
         name: '',
         unit: '',
+        shopCategory: '',
+        toBuy: true,
       }));
     }
   };
@@ -92,8 +105,9 @@ const RecipeChooseIngredients = () => {
   useEffect(() => {
     dispatch(fetchItems(ingredientItems));
     dispatch(fetchItems(unitItems));
+    dispatch(fetchItems(shopCategoryItems));
     values.ingredients = ingredients;
-  }, [dispatch, ingredientItems, unitItems, ingredients, values, ingredient]);
+  }, [dispatch, ingredientItems, unitItems, shopCategoryItems, ingredients, values, ingredient]);
 
   const { isModalOpen, toggleModal } = useModal();
 

@@ -1,33 +1,41 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { StyledHeader, MenuItem } from './HeaderStyles';
+
 import Logo from '../../atoms/Logo/Logo';
-import ShoppingListContext from '../../../context/ShoppingListContext';
-import Button from '../../atoms/Button/Button';
 import Badge from '../../atoms/Badge/Badge';
 
+import useChangeShoppingList from '../../../hooks/useChangeShoppingList';
+
+import { StyledHeader, MenuItem, StyledButton, StyledMenu } from './HeaderStyles';
+
 const Header = ({ subpage }) => {
-  const [shoppingList] = useContext(ShoppingListContext);
+  const [shoppingList] = useChangeShoppingList();
+  const { recipes } = shoppingList;
+
   return (
     <StyledHeader subpage={subpage}>
       <Link to="/">
         <Logo />
       </Link>
-      <div>
+
+      <StyledMenu>
         <MenuItem as={Link} to="/">
           home
         </MenuItem>
+
         <MenuItem as={Link} to="/recipes">
           recipes
         </MenuItem>
+
         <MenuItem as={Link} to="/add-recipe">
           add recipe
         </MenuItem>
-        <Button as={Link} small="true" to="/shopping-list">
-          shopping list {shoppingList.length > 0 && <Badge number={shoppingList.length} />}
-        </Button>
-      </div>
+
+        <StyledButton as={Link} to="/shopping-list" small="true">
+          shopping list {recipes.length > 0 && <Badge number={recipes.length} />}
+        </StyledButton>
+      </StyledMenu>
     </StyledHeader>
   );
 };

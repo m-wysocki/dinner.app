@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import CategoryCard from '../../molecules/CategoryCard/CategoryCard';
-import useFetchItems from '../../../hooks/useFetchItems';
 
 const StyledList = styled.div`
   display: grid;
@@ -15,16 +15,20 @@ const StyledList = styled.div`
   }
 `;
 
-const CategoryList = () => {
-  const categories = useFetchItems('categories');
+const CategoryList = ({ categories }) => {
   return (
     <StyledList>
       {categories &&
-        categories.map(({ id, name, slug }) => (
-          <CategoryCard key={id} id={id} slug={slug} name={name} />
-        ))}
+        categories.map(category => <CategoryCard key={category.id} category={category} />)}
     </StyledList>
   );
 };
 
 export default CategoryList;
+
+CategoryList.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.object),
+};
+CategoryList.defaultProps = {
+  categories: null,
+};

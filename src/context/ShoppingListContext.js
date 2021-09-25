@@ -1,5 +1,9 @@
 import React from 'react';
 
-const ShoppingListContext = React.createContext([]);
+export const initialShoppingListContext = {
+  recipes: [],
+  ingredients: {},
+};
+const ShoppingListContext = React.createContext(initialShoppingListContext);
 
 export default ShoppingListContext;

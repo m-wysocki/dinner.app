@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { StyledCategory, Title } from './CategoryCardStyles';
 
-const CategoryCard = ({ id, name, slug }) => (
+const CategoryCard = ({ category: { id, name, slug } }) => (
   <StyledCategory as={Link} to={`/categories/${id}/${slug}`}>
     <Title>{name}</Title>
   </StyledCategory>
@@ -12,7 +12,5 @@ const CategoryCard = ({ id, name, slug }) => (
 export default CategoryCard;
 
 CategoryCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
+  category: PropTypes.instanceOf(Object).isRequired,
 };
