@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.text};
   color: #fff;
-  font-weight: ${({ theme }) => theme.light};
+  font-weight: ${({ theme }) => theme.regular};
   font-size: 1.8rem;
   padding: 1.5rem 3.5rem;
   display: inline-flex;
@@ -37,7 +37,7 @@ const Button = styled.button`
   ${({ small }) =>
     small &&
     css`
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       padding: 1rem 2rem;
     `}
   ${({ remove }) =>

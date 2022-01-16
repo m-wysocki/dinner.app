@@ -13,6 +13,10 @@ const StyledList = styled.div`
   @media (max-width: 1199px) {
     grid-template-columns: repeat(4, 1fr);
   }
+  @media ${({ theme }) => theme.media.maxMobile} {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
 `;
 
 const CategoryList = ({ categories }) => {

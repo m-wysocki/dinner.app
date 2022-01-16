@@ -37,6 +37,10 @@ const Heading = styled.h2`
     big &&
     css`
       font-size: 4.8rem;
+      
+      @media ${({ theme }) => theme.media.maxMobile} {
+          font-size: 3rem;
+      }
     `}
   ${({ small }) =>
     small &&

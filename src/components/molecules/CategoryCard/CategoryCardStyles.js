@@ -29,6 +29,10 @@ export const StyledCategory = styled.div`
   &:hover {
     background-color: ${theme.colors.green};
   }
+
+  @media ${({ theme }) => theme.media.maxMobile} {
+    height: 10rem;
+  }
 `;
 
 export const Title = styled.span`
@@ -36,4 +40,8 @@ export const Title = styled.span`
   font-weight: ${theme.regular};
   text-align: center;
   text-transform: lowercase;
+
+  @media ${({ theme }) => theme.media.maxMobile} {
+    font-size: 1.8rem;
+  }
 `;

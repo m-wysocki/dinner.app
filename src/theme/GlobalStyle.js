@@ -1,13 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
+
 import { theme } from './mainTheme';
 
-const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,900&display=swap');
+export const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
   }
   html {
     font-size: 0.525vw;
@@ -31,9 +31,11 @@ const GlobalStyle = createGlobalStyle`
         font-size: 1.2rem 
       }
   }
+  
   a{
     text-decoration: none;
   }
+  
   img{
     max-width: 100%;
   }
@@ -60,5 +62,3 @@ const GlobalStyle = createGlobalStyle`
     color: ${theme.colors.text};
   }
 `;
-
-export default GlobalStyle;

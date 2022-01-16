@@ -6,18 +6,20 @@ import CategoryList from '../../components/organisms/CategoryList/CategoryList';
 import HomepageTemplate from '../../templates/HomepageTemplate';
 import useFetchItems from '../../hooks/useFetchItems';
 
-const StyledHero = styled.div`
-  margin-bottom: 75px;
+const StyledHeading = styled.h2`
+  @media ${({ theme }) => theme.media.maxMobile} {
+    margin-bottom: 2rem;
+  }
 `;
 
 const HomepageView = () => {
   const categories = useFetchItems('categories');
   return (
     <HomepageTemplate>
-      <StyledHero>
-        <Hero />
-      </StyledHero>
-      <Heading thin>categories</Heading>
+      <Hero />
+      <StyledHeading as={Heading} thin>
+        categories
+      </StyledHeading>
       <CategoryList categories={categories} />
     </HomepageTemplate>
   );
