@@ -47,7 +47,7 @@ const SingleRecipeView = ({ match }) => {
             {recipe.name}
           </Heading>
           <S.Wrapper>
-            <img src={recipe.image || emptyPlateImage} alt={recipe.name} />
+            <S.Image src={recipe.image || emptyPlateImage} alt={recipe.name} />
             <div>
               <S.Buttons>
                 <AddToShoppingList recipeId={recipe.id} />

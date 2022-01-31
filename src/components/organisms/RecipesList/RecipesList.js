@@ -19,6 +19,8 @@ const List = styled.div`
 
   @media ${({ theme }) => theme.media.maxMobile} {
     grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
   }
 `;
 
