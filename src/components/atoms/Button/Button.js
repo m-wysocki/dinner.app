@@ -22,6 +22,7 @@ const Button = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.extra};
   }
+  
   ${({ secondary }) =>
     secondary &&
     css`
@@ -40,6 +41,7 @@ const Button = styled.button`
       font-size: 1.4rem;
       padding: 1rem 2rem;
     `}
+  
   ${({ remove }) =>
     remove &&
     css`
@@ -48,6 +50,7 @@ const Button = styled.button`
         border: solid 0.2rem ${({ theme }) => theme.colors.extra};
       }
     `}
+  
     ${({ add }) =>
       add &&
       css`
