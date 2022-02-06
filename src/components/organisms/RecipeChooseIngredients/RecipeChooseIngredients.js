@@ -27,6 +27,8 @@ const RecipeChooseIngredients = () => {
   const shopCategories = useSelector(state => state[shopCategoryItems]);
 
   const unitTextRef = useRef(null);
+  const unitInputRef = useRef(null);
+
   const initialIngredient = {
     id: '',
     name: '',
@@ -50,6 +52,7 @@ const RecipeChooseIngredients = () => {
   const handleSetIngredient = ingredientId => {
     if (ingredientId) {
       setIdValid(true);
+      unitInputRef.current.focus();
       const selectedIngredient = items.filter(item => item.id === ingredientId)[0];
       const unit = units.filter(item => item.id === selectedIngredient.unitId)[0];
       const shopCategory = shopCategories.filter(
@@ -124,6 +127,7 @@ const RecipeChooseIngredients = () => {
               name="ingredient"
               initialSearch={ingredient.name}
               setIngredientFn={handleSetIngredient}
+              withAddingToFormikContext
               inline
             />
             {!isIdValid && <InputError absolute>This field is required</InputError>}
@@ -137,6 +141,7 @@ const RecipeChooseIngredients = () => {
               value={ingredient.amount}
               label="amount*"
               onChange={handleAmountChange}
+              ref={unitInputRef}
             />
 
             {!isAmountValid && <InputError absolute>This field must be a number</InputError>}
