@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
   padding: 3rem 5rem;
   display: flex;
   flex-direction: column;
+  z-index: 10;
 `;
 export const CloseButton = styled.a`
   align-self: flex-end;

@@ -67,8 +67,12 @@ const InputLiveSearch = ({
   };
 
   useEffect(() => {
-    if (activeItem) {
-      setSearch(activeItem.name);
+    if (
+      search.length &&
+      values?.ingredients?.length &&
+      values.ingredients.find(c => c.name === search)
+    ) {
+      setSearch('');
     }
 
     if (autocomplete) {
@@ -94,7 +98,7 @@ const InputLiveSearch = ({
         onChange={handleInputChange}
         onFocus={handleInputFocus}
       />
-      {(autocomplete || search) && !activeItem && (
+      {autocomplete && (
         <S.SearchResultWrapper>
           {search && search.length > 0 && !items.find(c => c.name === search) && withAddingNewItem && (
             <>
