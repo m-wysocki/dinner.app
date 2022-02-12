@@ -28,6 +28,8 @@ export const AddItemOption = styled.div`
 export const ItemsList = styled.div`
   display: flex;
   flex-direction: column;
+  max-height: 160px;
+  overflow-y: auto;
 `;
 export const Item = styled.span`
   cursor: pointer;
