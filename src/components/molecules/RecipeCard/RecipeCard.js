@@ -16,13 +16,19 @@ const RecipeCard = ({ recipe }) => {
   const bookName = book ? book.name : null;
   const categoryName = category ? category.name : null;
 
+  const recipeLink = `/recipes/${id}/${slug}`;
+
   return (
     <S.StyledRecipe>
-      <S.Image>
-        <img src={image || emptyPlateImage} alt={name} />
-      </S.Image>
+      <Link to={recipeLink}>
+        <S.Image>
+          <img src={image || emptyPlateImage} alt={name} />
+        </S.Image>
+      </Link>
       <S.Content>
-        <S.StyledHeading as={Heading}>{name}</S.StyledHeading>
+        <S.StyledHeading as={Heading}>
+          <Link to={recipeLink}>{name}</Link>
+        </S.StyledHeading>
         <S.Info>
           {preparationTime && (
             <S.InfoItem>
@@ -46,7 +52,7 @@ const RecipeCard = ({ recipe }) => {
       </S.Content>
       <S.Footer>
         <AddToShoppingList recipeId={id} />
-        <Link to={`/recipes/${id}/${slug}`}>
+        <Link to={recipeLink}>
           <Button small>more</Button>
         </Link>
       </S.Footer>

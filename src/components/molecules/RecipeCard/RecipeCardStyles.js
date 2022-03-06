@@ -51,11 +51,21 @@ export const Content = styled.div`
   width: 100%;
   padding: 1.5rem;
 `;
+
 export const StyledHeading = styled.h2`
   font-size: 1.8rem;
   margin: 0 0 3rem 0;
   word-break: break-word;
   text-transform: lowercase;
+
+  a {
+    color: ${({ theme }) => theme.colors.text};
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.extra};
+    }
+  }
 `;
 
 export const Info = styled.div`
