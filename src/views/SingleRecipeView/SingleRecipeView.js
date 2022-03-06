@@ -39,6 +39,7 @@ const SingleRecipeView = ({ match }) => {
   };
 
   if (!recipe) return <Loader />;
+
   return (
     <SubpageTemplate>
       {recipe ? (

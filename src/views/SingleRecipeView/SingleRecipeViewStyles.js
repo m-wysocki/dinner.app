@@ -45,7 +45,7 @@ export const Buttons = styled.div`
   padding-right: 10rem;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 2rem;
   ${Button} {
     margin-left: 1.5rem;
     background-color: transparent;
