@@ -24,6 +24,7 @@ export const Image = styled.img`
   @media ${({ theme }) => theme.media.maxMobile} {
     max-width: 400px;
     justify-self: center;
+    width: 100%;
   }
 `;
 

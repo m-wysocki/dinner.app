@@ -6,6 +6,11 @@ const Heading = styled.h2`
   font-weight: ${({ theme }) => theme.bold};
   position: relative;
   margin-bottom: ${({ mb }) => mb || '4rem'};
+
+  @media ${({ theme }) => theme.media.maxMobile} {
+    margin-bottom: 2rem;
+  }
+  
   &::after {
     content: '';
     display: block;
@@ -37,15 +42,19 @@ const Heading = styled.h2`
     big &&
     css`
       font-size: 4.8rem;
-      
+
       @media ${({ theme }) => theme.media.maxMobile} {
-          font-size: 3rem;
+        font-size: 3rem;
       }
     `}
   ${({ small }) =>
     small &&
     css`
       font-size: 2.8rem;
+
+      @media ${({ theme }) => theme.media.maxMobile} {
+        font-size: 2rem;
+      }
     `}
 `;
 

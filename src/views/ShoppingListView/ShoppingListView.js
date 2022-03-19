@@ -5,6 +5,7 @@ import StyledLink from '../../components/atoms/StyledLink/StyledLink';
 import Heading from '../../components/atoms/Heading/Heading';
 import RecipesList from '../../components/organisms/RecipesList/RecipesList';
 import IngredientList from '../../components/organisms/IngredientList/IngredientList';
+import SingleAccordion from '../../components/organisms/SingleAccordion/SingleAccordion';
 
 import SubpageTemplate from '../../templates/SubpageTemplate';
 
@@ -24,8 +25,10 @@ const ShoppingListView = () => {
 
       {filteredRecipes && filteredRecipes.length > 0 ? (
         <>
-          <Heading small>Recipes list</Heading>
-          <RecipesList recipes={filteredRecipes} />
+          <SingleAccordion title="Recipes list">
+            <RecipesList recipes={filteredRecipes} />
+          </SingleAccordion>
+
           {shoppingList && shoppingList.ingredients && (
             <IngredientList ingredients={shoppingList.ingredients} />
           )}
