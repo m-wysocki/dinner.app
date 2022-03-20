@@ -11,7 +11,7 @@ import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
 import InputError from '../../atoms/InputError/InputError';
 
-const AddIngredientsForm = ({ toggleModal }) => {
+const AddIngredientsForm = ({ toggleModal, afterSuccessFn }) => {
   const itemsType = 'ingredients';
   const dispatch = useDispatch();
   const addIngredients = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
@@ -37,11 +37,13 @@ const AddIngredientsForm = ({ toggleModal }) => {
           shopCategoryId: '',
         }}
         onSubmit={values => {
-          addIngredients(itemsType, values);
-          toast.success('👌 The ingredient was added successfully');
-          setTimeout(() => {
-            toggleModal();
-          }, 1000);
+          addIngredients(itemsType, values).then(ingredientId => {
+            afterSuccessFn(ingredientId);
+            toast.success('👌 The ingredient was added successfully');
+            setTimeout(() => {
+              toggleModal();
+            }, 1000);
+          });
         }}
       >
         {() => (
@@ -82,4 +84,9 @@ export default AddIngredientsForm;
 
 AddIngredientsForm.propTypes = {
   toggleModal: PropTypes.func.isRequired,
+  afterSuccessFn: PropTypes.func,
+};
+
+AddIngredientsForm.defaultProps = {
+  afterSuccessFn: () => null,
 };

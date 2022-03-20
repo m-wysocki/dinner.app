@@ -14,9 +14,11 @@ const InputLiveSearch = ({
   searchItems,
   label,
   name,
+  initialSearch,
   withAddingNewItem,
   withAddingToFormikContext,
   setIngredientFn,
+  addMissingItemFn,
   inline,
 }) => {
   const { values } = useFormikContext();
@@ -92,7 +94,7 @@ const InputLiveSearch = ({
         as={Input}
         name={`${searchItems}-name`}
         type="text"
-        value={search}
+        value={search || initialSearch}
         ref={inputEl}
         label={label}
         onChange={handleInputChange}
@@ -102,7 +104,7 @@ const InputLiveSearch = ({
         <S.SearchResultWrapper>
           {search && search.length > 0 && !items.find(c => c.name === search) && withAddingNewItem && (
             <>
-              <S.AddItemOption onClick={handleAddCategory}>
+              <S.AddItemOption onClick={addMissingItemFn || handleAddCategory}>
                 Add: <S.AddItemName>{search}</S.AddItemName>
               </S.AddItemOption>
 
@@ -130,16 +132,20 @@ export default InputLiveSearch;
 InputLiveSearch.propTypes = {
   label: PropTypes.string.isRequired,
   searchItems: PropTypes.string.isRequired,
+  initialSearch: PropTypes.string,
   name: PropTypes.string.isRequired,
   withAddingNewItem: PropTypes.bool,
   withAddingToFormikContext: PropTypes.bool,
   setIngredientFn: PropTypes.func,
+  addMissingItemFn: PropTypes.func,
   inline: PropTypes.bool,
 };
 
 InputLiveSearch.defaultProps = {
   withAddingNewItem: false,
   withAddingToFormikContext: false,
+  initialSearch: '',
   setIngredientFn: () => null,
+  addMissingItemFn: null,
   inline: false,
 };

@@ -20,6 +20,7 @@ const RecipeChooseIngredients = () => {
   const shopCategoryItems = 'shopCategories';
 
   const { values } = useFormikContext();
+  const { isModalOpen, toggleModal } = useModal();
 
   const dispatch = useDispatch();
   const items = useSelector(state => state[ingredientItems]);
@@ -43,6 +44,7 @@ const RecipeChooseIngredients = () => {
   const [isIdValid, setIdValid] = useState(true);
   const [isAmountValid, setAmountValid] = useState(true);
   const [ingredients, setIngredients] = useState(values.ingredients);
+  const [activeIngredient, setActiveIngredient] = useState('');
 
   const idSchema = string().required();
   const amountSchema = number()
@@ -78,6 +80,12 @@ const RecipeChooseIngredients = () => {
     }
   };
 
+  const handleChangeActiveIngredient = ingredientId => {
+    if (ingredientId) {
+      setActiveIngredient(ingredientId);
+    }
+  };
+
   const handleAmountChange = event => {
     const { target } = event;
     const { value } = target;
@@ -106,13 +114,18 @@ const RecipeChooseIngredients = () => {
   };
 
   useEffect(() => {
+    if (activeIngredient) {
+      handleSetIngredient(activeIngredient);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeIngredient]);
+
+  useEffect(() => {
     dispatch(fetchItems(ingredientItems));
     dispatch(fetchItems(unitItems));
     dispatch(fetchItems(shopCategoryItems));
     values.ingredients = ingredients;
   }, [dispatch, ingredientItems, unitItems, shopCategoryItems, ingredients, values, ingredient]);
-
-  const { isModalOpen, toggleModal } = useModal();
 
   return (
     <div>
@@ -126,8 +139,10 @@ const RecipeChooseIngredients = () => {
               searchItems="ingredients"
               name="ingredient"
               initialSearch={ingredient.name}
-              setIngredientFn={handleSetIngredient}
+              setIngredientFn={handleChangeActiveIngredient}
+              withAddingNewItem
               withAddingToFormikContext
+              addMissingItemFn={toggleModal}
               inline
             />
             {!isIdValid && <InputError absolute>This field is required</InputError>}
@@ -162,7 +177,10 @@ const RecipeChooseIngredients = () => {
           </Button>
 
           <Modal isModalOpen={isModalOpen} toggleModal={toggleModal}>
-            <AddIngredientsForm toggleModal={toggleModal} />
+            <AddIngredientsForm
+              toggleModal={toggleModal}
+              afterSuccessFn={handleChangeActiveIngredient}
+            />
           </Modal>
         </S.MissingIngredient>
       </S.Content>

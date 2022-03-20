@@ -35,6 +35,7 @@ export const Item = styled.span`
   cursor: pointer;
   padding: 1rem 1.5rem;
   transition: background-color 0.2s ease-in-out;
+  text-transform: lowercase;
   &:hover {
     background-color: #ccc;
   }
