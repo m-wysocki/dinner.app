@@ -53,18 +53,14 @@ const AddIngredientsForm = ({ toggleModal, afterSuccessFn }) => {
             </Field>
             <ErrorMessage name="name" component={InputError} />
             <InputLiveSearch
-              withAddingNewItem
               withAddingToFormikContext
-              id="unitId"
               name="unitId"
               searchItems="units"
               label="Search for a unit*"
             />
             <ErrorMessage name="unitId" component={InputError} />
             <InputLiveSearch
-              withAddingNewItem
               withAddingToFormikContext
-              id="shopCategoryId"
               name="shopCategoryId"
               searchItems="shopCategories"
               label="Search shop category*"

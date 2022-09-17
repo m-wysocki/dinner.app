@@ -138,11 +138,7 @@ const RecipeChooseIngredients = () => {
               label="Search ingredient*"
               searchItems="ingredients"
               name="ingredient"
-              initialSearch={ingredient.name}
-              setIngredientFn={handleChangeActiveIngredient}
-              withAddingNewItem
-              withAddingToFormikContext
-              addMissingItemFn={toggleModal}
+              onChangeFn={handleChangeActiveIngredient}
               inline
             />
             {!isIdValid && <InputError absolute>This field is required</InputError>}

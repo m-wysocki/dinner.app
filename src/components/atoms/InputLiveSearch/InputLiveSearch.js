@@ -1,151 +1,109 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import slugify from 'react-slugify';
 import PropTypes from 'prop-types';
 import { useFormikContext } from 'formik';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { addItem } from '../../../actions';
-import Input from '../Input/Input';
-import BreakLine from '../BreakLine/BreakLine';
 import * as S from './InputLiveSearchStyles';
 import useFetchItems from '../../../hooks/useFetchItems';
-import useFetchItemsByParam from '../../../hooks/useFetchItemsByParam';
+
+const filter = createFilterOptions();
 
 const InputLiveSearch = ({
   searchItems,
   label,
   name,
-  initialSearch,
-  withAddingNewItem,
   withAddingToFormikContext,
-  setIngredientFn,
-  addMissingItemFn,
+  onChangeFn,
   inline,
 }) => {
   const { values } = useFormikContext();
-  const [search, setSearch] = useState('');
-  const [autocomplete, setAutocomplete] = useState(false);
   const items = useFetchItems(searchItems);
   const dispatch = useDispatch();
-  const inputEl = useRef(null);
-  const wrapperRef = useRef(null);
 
-  const addCategory = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
+  const [value, setValue] = React.useState(null);
 
-  const activeItem = useFetchItemsByParam(searchItems, 'id', values[name])[0];
+  const addNewItem = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
 
-  const handleInputChange = e => {
+  const setActiveItem = item => {
+    setValue(item);
+
     if (withAddingToFormikContext) {
-      values[name] = '';
+      values[name] = item?.id || '';
     }
-    setSearch(e.target.value);
-  };
 
-  const handleInputFocus = () => {
-    setAutocomplete(true);
-  };
-
-  const handleAddCategory = () => {
-    addCategory(searchItems, { name: search, slug: slugify(search) }).then(id => {
-      values[name] = id;
-      setAutocomplete(false);
-    });
-  };
-
-  const handleResultClick = (id, itemName, e) => {
-    e.preventDefault();
-    if (withAddingToFormikContext) {
-      values[name] = id;
-    }
-    setSearch(itemName);
-    setAutocomplete(false);
-    setIngredientFn(id);
-  };
-
-  const handleClickOutside = event => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      setAutocomplete(false);
-      setIngredientFn();
+    if (onChangeFn) {
+      onChangeFn(item?.id || '');
     }
   };
 
-  useEffect(() => {
-    if (
-      search.length &&
-      values?.ingredients?.length &&
-      values.ingredients.find(c => c.name === search)
-    ) {
-      setSearch('');
-    }
-
-    if (autocomplete) {
-      document.addEventListener('mousedown', handleClickOutside);
+  const handleResultClick = (e, item) => {
+    if (item?.inputValue) {
+      const { inputValue } = item;
+      // Create a new value from the user input
+      addNewItem(searchItems, { name: inputValue, slug: slugify(inputValue) }).then(id => {
+        setActiveItem({ name: inputValue, id });
+      });
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      setActiveItem(item);
     }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeItem, searchItems, wrapperRef, autocomplete]);
+  };
 
-  return (
-    <S.SearcherWrapper inline={inline} ref={wrapperRef}>
-      <S.SearchInput
-        as={Input}
-        name={`${searchItems}-name`}
-        type="text"
-        value={search || initialSearch}
-        ref={inputEl}
-        label={label}
-        onChange={handleInputChange}
-        onFocus={handleInputFocus}
+  const filterOptionsPrepare = (options, params) => {
+    const filtered = filter(options, params);
+
+    const { inputValue } = params;
+    // Suggest the creation of a new value
+    const isExisting = options.some(option => inputValue === option.name);
+    if (inputValue !== '' && !isExisting) {
+      filtered.push({
+        inputValue,
+        name: `Add "${inputValue}"`,
+      });
+    }
+
+    return filtered;
+  };
+
+  return items?.length ? (
+    <S.SearcherWrapper inline={inline}>
+      <Autocomplete
+        value={value}
+        id={`${name}-autocomplete`}
+        options={items}
+        onChange={handleResultClick}
+        getOptionLabel={option => option.name}
+        filterOptions={filterOptionsPrepare}
+        autoHighlight
+        clearOnEscape
+        openOnFocus
+        disablePortal
+        style={{ minWidth: '200px' }}
+        renderInput={params => (
+          <TextField {...params} name={name} label={label} variant="standard" />
+        )}
+        disabled={!items?.length}
       />
-      {autocomplete && (
-        <S.SearchResultWrapper>
-          {search && search.length > 0 && !items.find(c => c.name === search) && withAddingNewItem && (
-            <>
-              <S.AddItemOption onClick={addMissingItemFn || handleAddCategory}>
-                Add: <S.AddItemName>{search}</S.AddItemName>
-              </S.AddItemOption>
-
-              {items.filter(item => item.name.toLowerCase().match(search.toLowerCase())).length >
-                0 && <BreakLine />}
-            </>
-          )}
-          <S.ItemsList>
-            {items &&
-              items
-                .filter(item => item.name.toLowerCase().match(search.toLowerCase()))
-                .map(({ id, name: itemName }) => (
-                  <S.Item key={id} onClick={e => handleResultClick(id, itemName, e)}>
-                    {itemName}
-                  </S.Item>
-                ))}
-          </S.ItemsList>
-        </S.SearchResultWrapper>
-      )}
     </S.SearcherWrapper>
+  ) : (
+    <p>Loading...</p>
   );
 };
 export default InputLiveSearch;
 
 InputLiveSearch.propTypes = {
   label: PropTypes.string.isRequired,
-  searchItems: PropTypes.string.isRequired,
-  initialSearch: PropTypes.string,
   name: PropTypes.string.isRequired,
-  withAddingNewItem: PropTypes.bool,
+  searchItems: PropTypes.string.isRequired,
   withAddingToFormikContext: PropTypes.bool,
-  setIngredientFn: PropTypes.func,
-  addMissingItemFn: PropTypes.func,
   inline: PropTypes.bool,
+  onChangeFn: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
 };
 
 InputLiveSearch.defaultProps = {
-  withAddingNewItem: false,
   withAddingToFormikContext: false,
-  initialSearch: '',
-  setIngredientFn: () => null,
-  addMissingItemFn: null,
+  onChangeFn: false,
   inline: false,
 };
