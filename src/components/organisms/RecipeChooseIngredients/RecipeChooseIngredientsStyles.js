@@ -11,6 +11,7 @@ export const AddIngredient = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
+  align-self: flex-start;
 `;
 
 export const IngredientWrapper = styled.div`
@@ -23,6 +24,7 @@ export const IngredientWrapper = styled.div`
 
 export const StyledInput = styled.input`
   margin-bottom: 0;
+  min-width: 150px;
 `;
 
 export const Unit = styled.div`

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Heading from '../../atoms/Heading/Heading';
 import { Arrow, Header, Wrapper } from './SingleAccordion.styled';
 
@@ -21,3 +22,8 @@ const SingleAccordion = ({ title, children }) => {
 };
 
 export default SingleAccordion;
+
+SingleAccordion.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+};

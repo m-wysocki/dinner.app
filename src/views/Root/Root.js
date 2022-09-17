@@ -23,8 +23,8 @@ const Root = () => {
   const [shoppingList, setShoppingList] = useState(shoppingListStorage);
   return (
     <Protect blur styles={protectionPageStyle} sha512={PROTECT_SHA512}>
-      <GlobalStyle />
       <Provider store={store}>
+        <GlobalStyle />
         <ShoppingListContext.Provider value={[shoppingList, setShoppingList]}>
           <BrowserRouter>
             <MainTemplate>

@@ -3,143 +3,156 @@ import { useDispatch } from 'react-redux';
 import slugify from 'react-slugify';
 import PropTypes from 'prop-types';
 import { useFormikContext } from 'formik';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { addItem } from '../../../actions';
-import Input from '../Input/Input';
-import BreakLine from '../BreakLine/BreakLine';
 import * as S from './InputLiveSearchStyles';
 import useFetchItems from '../../../hooks/useFetchItems';
-import useFetchItemsByParam from '../../../hooks/useFetchItemsByParam';
+import AddIngredientsForm from '../../organisms/AddIngredientsForm/AddIngredientsForm';
+import Modal from '../../organisms/Modal/Modal';
+import useModal from '../../../hooks/useModal';
+
+const filter = createFilterOptions();
 
 const InputLiveSearch = ({
   searchItems,
   label,
   name,
-  withAddingNewItem,
   withAddingToFormikContext,
-  setIngredientFn,
+  onChangeFn,
+  isAddNewModal,
   inline,
+  clearField,
+  focusField,
 }) => {
   const { values } = useFormikContext();
-  const [search, setSearch] = useState('');
-  const [autocomplete, setAutocomplete] = useState(false);
+  const { isModalOpen, toggleModal } = useModal();
   const items = useFetchItems(searchItems);
   const dispatch = useDispatch();
-  const inputEl = useRef(null);
-  const wrapperRef = useRef(null);
 
-  const addCategory = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
+  const [value, setValue] = useState(null);
+  const [modalInputValue, setModalInputValue] = useState(null);
 
-  const activeItem = useFetchItemsByParam(searchItems, 'id', values[name])[0];
+  const inputAutocompleteRef = useRef(null);
 
-  const handleInputChange = e => {
-    if (withAddingToFormikContext) {
-      values[name] = '';
-    }
-    setSearch(e.target.value);
-  };
-
-  const handleInputFocus = () => {
-    setAutocomplete(true);
-  };
-
-  const handleAddCategory = () => {
-    addCategory(searchItems, { name: search, slug: slugify(search) }).then(id => {
-      values[name] = id;
-      setAutocomplete(false);
-    });
-  };
-
-  const handleResultClick = (id, itemName, e) => {
-    e.preventDefault();
-    if (withAddingToFormikContext) {
-      values[name] = id;
-    }
-    setSearch(itemName);
-    setAutocomplete(false);
-    setIngredientFn(id);
-  };
-
-  const handleClickOutside = event => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      setAutocomplete(false);
-      setIngredientFn();
-    }
-  };
+  const addNewItem = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
 
   useEffect(() => {
-    if (
-      search.length &&
-      values?.ingredients?.length &&
-      values.ingredients.find(c => c.name === search)
-    ) {
-      setSearch('');
+    if (clearField && items?.length) {
+      setValue(null);
     }
 
-    if (autocomplete) {
-      document.addEventListener('mousedown', handleClickOutside);
+    if (focusField && items?.length) {
+      inputAutocompleteRef.current.focus();
+    }
+  }, [clearField, focusField, items]);
+
+  const setActiveItem = item => {
+    setValue(item);
+
+    if (withAddingToFormikContext) {
+      values[name] = item?.id || '';
+    }
+
+    if (onChangeFn) {
+      onChangeFn(item?.id || '');
+    }
+  };
+
+  const handleAddNewItemClick = inputValue => {
+    if (isAddNewModal) {
+      toggleModal();
+      setModalInputValue(inputValue);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      // Create a new value from the user input
+      addNewItem(searchItems, { name: inputValue, slug: slugify(inputValue) }).then(id => {
+        setActiveItem({ name: inputValue, id });
+      });
     }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeItem, searchItems, wrapperRef, autocomplete]);
+  };
 
-  return (
-    <S.SearcherWrapper inline={inline} ref={wrapperRef}>
-      <S.SearchInput
-        as={Input}
-        name={`${searchItems}-name`}
-        type="text"
-        value={search}
-        ref={inputEl}
-        label={label}
-        onChange={handleInputChange}
-        onFocus={handleInputFocus}
-      />
-      {autocomplete && (
-        <S.SearchResultWrapper>
-          {search && search.length > 0 && !items.find(c => c.name === search) && withAddingNewItem && (
-            <>
-              <S.AddItemOption onClick={handleAddCategory}>
-                Add: <S.AddItemName>{search}</S.AddItemName>
-              </S.AddItemOption>
+  const handleChange = (e, item) => {
+    if (item?.inputValue) {
+      handleAddNewItemClick(item?.inputValue);
+    } else {
+      setActiveItem(item);
+    }
+  };
 
-              {items.filter(item => item.name.toLowerCase().match(search.toLowerCase())).length >
-                0 && <BreakLine />}
-            </>
+  const filterOptionsPrepare = (options, params) => {
+    const filtered = filter(options, params);
+
+    const { inputValue } = params;
+    // Suggest the creation of a new value
+    const isExisting = options.some(option => inputValue === option.name);
+    if (inputValue !== '' && !isExisting) {
+      filtered.push({
+        inputValue,
+        name: `Add "${inputValue}"`,
+      });
+    }
+
+    return filtered;
+  };
+
+  return items?.length ? (
+    <>
+      <S.SearcherWrapper inline={inline}>
+        <Autocomplete
+          value={value}
+          id={`${name}-autocomplete`}
+          options={items}
+          onChange={handleChange}
+          getOptionLabel={option => option.name}
+          filterOptions={filterOptionsPrepare}
+          autoHighlight
+          clearOnEscape
+          openOnFocus
+          disablePortal
+          style={{ minWidth: '200px' }}
+          renderInput={params => (
+            <TextField
+              {...params}
+              name={name}
+              label={label}
+              variant="standard"
+              inputRef={inputAutocompleteRef}
+            />
           )}
-          <S.ItemsList>
-            {items &&
-              items
-                .filter(item => item.name.toLowerCase().match(search.toLowerCase()))
-                .map(({ id, name: itemName }) => (
-                  <S.Item key={id} onClick={e => handleResultClick(id, itemName, e)}>
-                    {itemName}
-                  </S.Item>
-                ))}
-          </S.ItemsList>
-        </S.SearchResultWrapper>
-      )}
-    </S.SearcherWrapper>
+          disabled={!items?.length}
+        />
+      </S.SearcherWrapper>
+      <Modal isModalOpen={isModalOpen} toggleModal={toggleModal}>
+        <AddIngredientsForm
+          toggleModal={toggleModal}
+          name={modalInputValue}
+          afterSuccessFn={id => setActiveItem({ name: modalInputValue, id })}
+        />
+      </Modal>
+    </>
+  ) : (
+    <p>Loading...</p>
   );
 };
 export default InputLiveSearch;
 
 InputLiveSearch.propTypes = {
   label: PropTypes.string.isRequired,
-  searchItems: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  withAddingNewItem: PropTypes.bool,
+  searchItems: PropTypes.string.isRequired,
   withAddingToFormikContext: PropTypes.bool,
-  setIngredientFn: PropTypes.func,
   inline: PropTypes.bool,
+  onChangeFn: PropTypes.func,
+  isAddNewModal: PropTypes.bool,
+  clearField: PropTypes.bool,
+  focusField: PropTypes.bool,
 };
 
 InputLiveSearch.defaultProps = {
-  withAddingNewItem: false,
   withAddingToFormikContext: false,
-  setIngredientFn: () => null,
+  onChangeFn: null,
+  isAddNewModal: false,
   inline: false,
+  clearField: false,
+  focusField: false,
 };

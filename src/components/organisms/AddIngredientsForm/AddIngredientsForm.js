@@ -11,7 +11,7 @@ import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
 import InputError from '../../atoms/InputError/InputError';
 
-const AddIngredientsForm = ({ toggleModal }) => {
+const AddIngredientsForm = ({ name, toggleModal, afterSuccessFn }) => {
   const itemsType = 'ingredients';
   const dispatch = useDispatch();
   const addIngredients = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
@@ -32,16 +32,18 @@ const AddIngredientsForm = ({ toggleModal }) => {
             .required('This field is required'),
         })}
         initialValues={{
-          name: '',
+          name,
           unitId: '',
           shopCategoryId: '',
         }}
         onSubmit={values => {
-          addIngredients(itemsType, values);
-          toast.success('👌 The ingredient was added successfully');
-          setTimeout(() => {
-            toggleModal();
-          }, 1000);
+          addIngredients(itemsType, values).then(ingredientId => {
+            afterSuccessFn(ingredientId);
+            toast.success('👌 The ingredient was added successfully');
+            setTimeout(() => {
+              toggleModal();
+            }, 300);
+          });
         }}
       >
         {() => (
@@ -51,18 +53,15 @@ const AddIngredientsForm = ({ toggleModal }) => {
             </Field>
             <ErrorMessage name="name" component={InputError} />
             <InputLiveSearch
-              withAddingNewItem
               withAddingToFormikContext
-              id="unitId"
               name="unitId"
               searchItems="units"
               label="Search for a unit*"
+              focusField
             />
             <ErrorMessage name="unitId" component={InputError} />
             <InputLiveSearch
-              withAddingNewItem
               withAddingToFormikContext
-              id="shopCategoryId"
               name="shopCategoryId"
               searchItems="shopCategories"
               label="Search shop category*"
@@ -82,4 +81,11 @@ export default AddIngredientsForm;
 
 AddIngredientsForm.propTypes = {
   toggleModal: PropTypes.func.isRequired,
+  afterSuccessFn: PropTypes.func,
+  name: PropTypes.string,
+};
+
+AddIngredientsForm.defaultProps = {
+  afterSuccessFn: () => null,
+  name: '',
 };

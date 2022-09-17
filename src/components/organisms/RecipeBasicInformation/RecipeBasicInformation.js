@@ -28,9 +28,7 @@ const RecipeBasicInformation = () => {
       </Field>
 
       <InputLiveSearch
-        withAddingNewItem
         withAddingToFormikContext
-        id="categoryId"
         name="categoryId"
         searchItems="categories"
         label="Search category*"
