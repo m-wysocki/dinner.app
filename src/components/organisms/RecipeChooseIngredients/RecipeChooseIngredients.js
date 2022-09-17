@@ -3,9 +3,6 @@ import { string, number } from 'yup';
 import { ErrorMessage, useFormikContext } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems } from '../../../actions';
-import Modal from '../Modal/Modal';
-import useModal from '../../../hooks/useModal';
-import AddIngredientsForm from '../AddIngredientsForm/AddIngredientsForm';
 import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
 import Input from '../../atoms/Input/Input';
@@ -20,7 +17,6 @@ const RecipeChooseIngredients = () => {
   const shopCategoryItems = 'shopCategories';
 
   const { values } = useFormikContext();
-  const { isModalOpen, toggleModal } = useModal();
 
   const dispatch = useDispatch();
   const items = useSelector(state => state[ingredientItems]);
@@ -102,6 +98,7 @@ const RecipeChooseIngredients = () => {
     if (amountSchema.isValidSync(ingredient.amount) && idSchema.isValidSync(ingredient.id)) {
       setIngredients(prevState => [...prevState, ingredient]);
       setIngredient(initialIngredient);
+      setActiveIngredient('');
     } else {
       setIdValid(idSchema.isValidSync(ingredient.id));
       setAmountValid(amountSchema.isValidSync(ingredient.amount));
@@ -139,7 +136,10 @@ const RecipeChooseIngredients = () => {
               searchItems="ingredients"
               name="ingredient"
               onChangeFn={handleChangeActiveIngredient}
+              isAddNewModal
               inline
+              clearField={!activeIngredient}
+              focusField={!activeIngredient}
             />
             {!isIdValid && <InputError absolute>This field is required</InputError>}
           </S.IngredientWrapper>
@@ -160,44 +160,28 @@ const RecipeChooseIngredients = () => {
 
           <S.Unit ref={unitTextRef}>{ingredient.unit}</S.Unit>
 
-          <Button secondary small type="button" onClick={handleAddIngredient}>
+          <Button secondary small type="submit" onClick={handleAddIngredient}>
             add
           </Button>
         </S.AddIngredient>
 
         <S.MissingIngredient>
-          <p>Is there no the ingredient you need on the list?</p>
-
-          <Button small secondary type="button" onClick={toggleModal}>
-            add ingredient
-          </Button>
-
-          <Modal isModalOpen={isModalOpen} toggleModal={toggleModal}>
-            <AddIngredientsForm
-              toggleModal={toggleModal}
-              afterSuccessFn={handleChangeActiveIngredient}
-            />
-          </Modal>
+          {values.ingredients && values.ingredients.length > 0 && (
+            <ul>
+              {values.ingredients.map(item => (
+                <li key={item.id}>
+                  {item.name} {item.amount} {item.unit}{' '}
+                  <DeleteButton onClickFn={e => handleRemoveIngredient(e, item.id)}>
+                    delete
+                  </DeleteButton>
+                </li>
+              ))}
+            </ul>
+          )}
         </S.MissingIngredient>
       </S.Content>
 
       <ErrorMessage name="ingredients" component={InputError} />
-
-      {values.ingredients && values.ingredients.length > 0 && (
-        <div>
-          <Heading small>Ingredients</Heading>
-          <ul>
-            {values.ingredients.map(item => (
-              <li key={item.id}>
-                {item.name} {item.amount} {item.unit}{' '}
-                <DeleteButton onClickFn={e => handleRemoveIngredient(e, item.id)}>
-                  delete
-                </DeleteButton>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };

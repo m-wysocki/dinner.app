@@ -11,7 +11,7 @@ import Heading from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
 import InputError from '../../atoms/InputError/InputError';
 
-const AddIngredientsForm = ({ toggleModal, afterSuccessFn }) => {
+const AddIngredientsForm = ({ name, toggleModal, afterSuccessFn }) => {
   const itemsType = 'ingredients';
   const dispatch = useDispatch();
   const addIngredients = (itemType, itemContent) => dispatch(addItem(itemType, itemContent));
@@ -32,7 +32,7 @@ const AddIngredientsForm = ({ toggleModal, afterSuccessFn }) => {
             .required('This field is required'),
         })}
         initialValues={{
-          name: '',
+          name,
           unitId: '',
           shopCategoryId: '',
         }}
@@ -42,7 +42,7 @@ const AddIngredientsForm = ({ toggleModal, afterSuccessFn }) => {
             toast.success('👌 The ingredient was added successfully');
             setTimeout(() => {
               toggleModal();
-            }, 1000);
+            }, 300);
           });
         }}
       >
@@ -57,6 +57,7 @@ const AddIngredientsForm = ({ toggleModal, afterSuccessFn }) => {
               name="unitId"
               searchItems="units"
               label="Search for a unit*"
+              focusField
             />
             <ErrorMessage name="unitId" component={InputError} />
             <InputLiveSearch
@@ -81,8 +82,10 @@ export default AddIngredientsForm;
 AddIngredientsForm.propTypes = {
   toggleModal: PropTypes.func.isRequired,
   afterSuccessFn: PropTypes.func,
+  name: PropTypes.string,
 };
 
 AddIngredientsForm.defaultProps = {
   afterSuccessFn: () => null,
+  name: '',
 };
