@@ -64,11 +64,19 @@ const useChangeShoppingList = () => {
     });
   }
 
+  function clearShoppingList() {
+    setShoppingList({
+      recipes: [],
+      ingredients: {},
+    });
+    toast.error('🤷‍♂️ Shopping list has been cleared');
+  }
+
   useEffect(() => {
     setShoppingListStorage(shoppingList);
   }, [shoppingList, setShoppingListStorage]);
 
-  return [shoppingList, changeShoppingList, toggleToBuyIngredient];
+  return [shoppingList, changeShoppingList, toggleToBuyIngredient, clearShoppingList];
 };
 
 export default useChangeShoppingList;
