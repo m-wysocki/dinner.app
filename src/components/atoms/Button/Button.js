@@ -13,12 +13,12 @@ const Button = styled.button`
   border-radius: 3rem;
   cursor: pointer;
   box-shadow: none;
-  border: none;
   letter-spacing: 1px;
   outline: none;
   position: relative;
   line-height: 1;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+  border: solid 0.2rem ${({ theme }) => theme.colors.text};
   &:hover {
     background-color: ${({ theme }) => theme.colors.extra};
   }
@@ -51,13 +51,13 @@ const Button = styled.button`
       }
     `}
   
-    ${({ add }) =>
-      add &&
-      css`
-        &:hover {
-          border: solid 0.2rem ${({ theme }) => theme.colors.green};
-        }
-      `}
+  ${({ add }) =>
+    add &&
+    css`
+      &:hover {
+        border: solid 0.2rem ${({ theme }) => theme.colors.green};
+      }
+    `}
 `;
 
 export default Button;

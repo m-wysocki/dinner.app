@@ -1,19 +1,31 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import StyledLink from '../../components/atoms/StyledLink/StyledLink';
 import Heading from '../../components/atoms/Heading/Heading';
+import Button from '../../components/atoms/Button/Button';
 import RecipesList from '../../components/organisms/RecipesList/RecipesList';
 import IngredientList from '../../components/organisms/IngredientList/IngredientList';
+
 import SingleAccordion from '../../components/organisms/SingleAccordion/SingleAccordion';
 
 import SubpageTemplate from '../../templates/SubpageTemplate';
-
 import useChangeShoppingList from '../../hooks/useChangeShoppingList';
 import useFetchItems from '../../hooks/useFetchItems';
 
+const StyledBtn = styled.button`
+  display: block;
+  margin-left: auto;
+  margin-top: 2rem;
+
+  @media ${({ theme }) => theme.media.maxMobile} {
+    margin-left: unset;
+  }
+`;
+
 const ShoppingListView = () => {
-  const [shoppingList] = useChangeShoppingList();
+  const [shoppingList, , , clearShoppingList] = useChangeShoppingList();
   const recipes = useFetchItems('recipes');
 
   const filteredRecipes =
@@ -32,6 +44,10 @@ const ShoppingListView = () => {
           {shoppingList && shoppingList.ingredients && (
             <IngredientList ingredients={shoppingList.ingredients} />
           )}
+
+          <StyledBtn as={Button} onClick={clearShoppingList} small remove>
+            Clear the shopping list
+          </StyledBtn>
         </>
       ) : (
         <p>

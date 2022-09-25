@@ -17,6 +17,7 @@ export const fetchItems = itemsType => async dispatch => {
   // console.log('FETCH_REQUEST');
   return db
     .collection(itemsType)
+    .orderBy('name')
     .get()
     .then(querySnapshot => {
       const items = [];
