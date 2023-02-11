@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Protect from 'react-app-protect';
 
@@ -26,7 +26,7 @@ const Root = () => {
       <Provider store={store}>
         <GlobalStyle />
         <ShoppingListContext.Provider value={[shoppingList, setShoppingList]}>
-          <BrowserRouter>
+          <HashRouter>
             <MainTemplate>
               <>
                 <Switch>
@@ -39,7 +39,7 @@ const Root = () => {
                 </Switch>
               </>
             </MainTemplate>
-          </BrowserRouter>
+          </HashRouter>
         </ShoppingListContext.Provider>
       </Provider>
     </Protect>

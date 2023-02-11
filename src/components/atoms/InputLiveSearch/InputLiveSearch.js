@@ -108,8 +108,8 @@ const InputLiveSearch = ({
           autoHighlight
           clearOnEscape
           openOnFocus
-          disablePortal
           style={{ minWidth: '200px' }}
+          ListboxProps={{ style: { maxHeight: 150 } }}
           renderInput={params => (
             <TextField
               {...params}
