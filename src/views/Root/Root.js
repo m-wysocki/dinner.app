@@ -17,6 +17,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { PROTECT_SHA512 } from '../../utils/constans';
 import { protectionPageStyle } from '../../theme/protectionPageStyle';
 import 'react-app-protect/dist/index.css';
+import SettingsView from '../SettingsView/SettingsView';
 
 const Root = () => {
   const [shoppingListStorage] = useLocalStorage('shoppingList', initialShoppingListContext);
@@ -35,6 +36,7 @@ const Root = () => {
                   <Route path="/categories/:id/:slug" component={SingleCategoryView} />
                   <Route exact path="/recipes" component={RecipesView} />
                   <Route path="/add-recipe" component={AddRecipeView} />
+                  <Route path="/settings" component={SettingsView} />
                   <Route path="/shopping-list" component={ShoppingListView} />
                 </Switch>
               </>

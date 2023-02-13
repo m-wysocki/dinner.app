@@ -32,6 +32,10 @@ const Header = ({ subpage }) => {
           add recipe
         </MenuItem>
 
+        <MenuItem as={Link} to="/settings">
+          settings
+        </MenuItem>
+
         <StyledButton as={Link} to="/shopping-list" small="true">
           shopping list {recipes.length > 0 && <Badge number={recipes.length} />}
         </StyledButton>
