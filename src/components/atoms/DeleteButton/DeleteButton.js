@@ -16,17 +16,17 @@ const Button = styled.div`
     background-color: #e42323;
   }
   svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 13px;
+    height: 13px;
   }
   svg path {
     stroke: #fff;
   }
 `;
 
-const DeleteButton = ({ onClickFn }) => {
+const DeleteButton = ({ onClickFn, className }) => {
   return (
-    <Button onClick={onClickFn}>
+    <Button className={className} onClick={onClickFn}>
       <GrFormClose />
     </Button>
   );
@@ -36,4 +36,9 @@ export default DeleteButton;
 
 DeleteButton.propTypes = {
   onClickFn: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
+
+DeleteButton.defaultProps = {
+  className: null,
 };

@@ -32,7 +32,7 @@ const SingleRecipeView = ({ match }) => {
   const removeRecipe = (itemType, id) => dispatch(removeItem(itemType, id));
   const handleRemoveRecipe = () => {
     removeRecipe('recipes', recipe.id);
-    toast.success('The recipe was removed successfully');
+    toast.success('The recipe has been removed successfully');
     setTimeout(() => {
       history.push('/recipes');
     }, 1500);
