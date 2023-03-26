@@ -1,6 +1,6 @@
 # d!nner.
 
-### An application that generates a shopping list based on selected culinary recipes.
+### d!nner. is the application that generates a shopping list based on selected culinary recipes.
 
 https://dinner-react-app.netlify.app/ pass: mo
 
